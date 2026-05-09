@@ -16,6 +16,8 @@ import {
   Bed,
   CheckCircle2,
   AlertCircle,
+  Image as ImageIcon,
+  Upload,
 } from "lucide-react";
 
 interface WidgetSettings {
@@ -59,6 +61,12 @@ interface Settings {
     sunday: string;
   };
   widgets: WidgetSettings;
+  homepageImages: {
+    heroImage: string;
+    safetyImage: string;
+    roomSingleImage: string;
+    roomSharingImage: string;
+  };
   parentCompany: string;
   totalBeds: number;
 }
@@ -102,6 +110,12 @@ const DEFAULT_SETTINGS: Settings = {
     scrollToTop: {
       enabled: true,
     },
+  },
+  homepageImages: {
+    heroImage: "",
+    safetyImage: "",
+    roomSingleImage: "",
+    roomSharingImage: "",
   },
   parentCompany: "Simeka Capital",
   totalBeds: 1040,
@@ -313,6 +327,37 @@ export default function AdminSettingsPage() {
           </div>
         </Section>
 
+        {/* ── Homepage Images ─────────────────────── */}
+        <Section title="Homepage Images" icon={ImageIcon}>
+          <p className="text-xs text-white/40 mb-4">Upload images to replace the stock photography on the homepage. Leave an image empty to use the stock version.</p>
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <ImageUploadField 
+              label="Hero Background" 
+              value={settings.homepageImages.heroImage} 
+              onChange={(v) => update("homepageImages.heroImage", v)} 
+              hint="Main background image at the top of the homepage"
+            />
+            <ImageUploadField 
+              label="Safety Highlights" 
+              value={settings.homepageImages.safetyImage} 
+              onChange={(v) => update("homepageImages.safetyImage", v)} 
+              hint="Image shown next to the safety features"
+            />
+            <ImageUploadField 
+              label="Single Room Preview" 
+              value={settings.homepageImages.roomSingleImage} 
+              onChange={(v) => update("homepageImages.roomSingleImage", v)} 
+              hint="Thumbnail for the Single Room option"
+            />
+            <ImageUploadField 
+              label="Sharing Room Preview" 
+              value={settings.homepageImages.roomSharingImage} 
+              onChange={(v) => update("homepageImages.roomSharingImage", v)} 
+              hint="Thumbnail for the Sharing Room option"
+            />
+          </div>
+        </Section>
+
         {/* ── General ─────────────────────────────── */}
         <Section title="General" icon={Building2}>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
@@ -478,6 +523,92 @@ function WidgetCard({
         </button>
       </div>
       {enabled && children && <div className="mt-4 border-t border-white/5 pt-4">{children}</div>}
+    </div>
+  );
+}
+
+function ImageUploadField({
+  label,
+  value,
+  onChange,
+  hint,
+}: {
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  hint?: string;
+}) {
+  const [uploading, setUploading] = useState(false);
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const res = await fetch("/api/admin/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!res.ok) throw new Error("Upload failed");
+      const data = await res.json();
+      onChange(data.url);
+    } catch (err) {
+      console.error(err);
+      alert("Failed to upload image.");
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  return (
+    <div>
+      <label className="mb-1.5 block text-xs font-medium text-white/60">{label}</label>
+      <div className="flex items-center gap-3">
+        {value ? (
+          <div className="relative h-16 w-24 shrink-0 overflow-hidden rounded-lg border border-white/10 bg-black/20">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={value} alt="Preview" className="h-full w-full object-cover" />
+          </div>
+        ) : (
+          <div className="flex h-16 w-24 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5">
+            <ImageIcon className="h-6 w-6 text-white/20" />
+          </div>
+        )}
+        <div className="flex-1">
+          <div className="flex items-center gap-2">
+            <label className="cursor-pointer rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-white/10 flex items-center gap-1.5">
+              {uploading ? (
+                <>
+                  <Loader2 className="h-3.5 w-3.5 animate-spin text-amber" />
+                  Uploading...
+                </>
+              ) : (
+                <>
+                  <Upload className="h-3.5 w-3.5" />
+                  Upload
+                </>
+              )}
+              <input type="file" accept="image/*" className="hidden" onChange={handleFileChange} disabled={uploading} />
+            </label>
+            {value && (
+              <button
+                type="button"
+                onClick={() => onChange("")}
+                className="text-xs text-red-400 hover:text-red-300"
+                disabled={uploading}
+              >
+                Remove
+              </button>
+            )}
+          </div>
+          {hint && <p className="mt-1.5 text-[10px] text-white/30">{hint}</p>}
+        </div>
+      </div>
     </div>
   );
 }

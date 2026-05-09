@@ -10,8 +10,10 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Users, Maximize2 } from "lucide-react";
 import { rooms } from "@/data/rooms";
 import { formatPrice } from "@/lib/utils";
+import { useSiteSettings } from "@/components/providers/site-settings-provider";
 
 export function RoomPreview() {
+  const settings = useSiteSettings();
   const featured = rooms.slice(0, 3);
 
   return (
@@ -32,7 +34,13 @@ export function RoomPreview() {
               >
                 <div className="relative h-56 overflow-hidden">
                   <Image
-                    src={room.images[0]}
+                    src={
+                      room.id === "single-room" && settings?.homepageImages?.roomSingleImage
+                        ? settings.homepageImages.roomSingleImage
+                        : room.id === "sharing-room" && settings?.homepageImages?.roomSharingImage
+                        ? settings.homepageImages.roomSharingImage
+                        : room.images[0]
+                    }
                     alt={room.name}
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105"

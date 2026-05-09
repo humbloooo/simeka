@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { RevealOnScroll } from "@/components/effects/reveal-on-scroll";
 import { Fingerprint, Cctv, ShieldCheck, Lock } from "lucide-react";
+import { useSiteSettings } from "@/components/providers/site-settings-provider";
 
 const safetyFeatures = [
   {
@@ -29,6 +30,9 @@ const safetyFeatures = [
 ];
 
 export function SafetyHighlights() {
+  const settings = useSiteSettings();
+  const safetyImage = settings?.homepageImages?.safetyImage || "/images/hero.png";
+
   return (
     <section className="overflow-hidden bg-navy py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -76,7 +80,7 @@ export function SafetyHighlights() {
           <RevealOnScroll direction="right" className="relative">
             <div className="relative overflow-hidden rounded-[28px] shadow-2xl">
               <Image
-                src="/images/hero.png"
+                src={safetyImage}
                 alt="Simeka Heights security and safety features"
                 width={700}
                 height={900}

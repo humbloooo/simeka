@@ -49,6 +49,14 @@ export interface ISiteSettings extends Document {
     };
   };
 
+  // Images
+  homepageImages: {
+    heroImage: string;
+    safetyImage: string;
+    roomSingleImage: string;
+    roomSharingImage: string;
+  };
+
   // General
   parentCompany: string;
   totalBeds: number;
@@ -104,6 +112,13 @@ const SiteSettingsSchema = new Schema<ISiteSettings>(
       scrollToTop: {
         enabled: { type: Boolean, default: true },
       },
+    },
+
+    homepageImages: {
+      heroImage: { type: String, default: "" },
+      safetyImage: { type: String, default: "" },
+      roomSingleImage: { type: String, default: "" },
+      roomSharingImage: { type: String, default: "" },
     },
 
     parentCompany: { type: String, default: "Simeka Capital" },

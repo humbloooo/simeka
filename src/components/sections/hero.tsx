@@ -13,15 +13,18 @@ import {
   BusFront,
 } from "lucide-react";
 import { FloatingShapes } from "@/components/effects/floating-shapes";
+import { useSiteSettings } from "@/components/providers/site-settings-provider";
 
 export function Hero() {
   const nextYear = new Date().getFullYear() + 1;
+  const settings = useSiteSettings();
+  const heroImage = settings?.homepageImages?.heroImage || "/images/hero.png";
 
   return (
     <section className="relative flex min-h-[100svh] items-center overflow-hidden">
       <div className="absolute inset-0">
         <Image
-          src="/images/hero.png"
+          src={heroImage}
           alt="Simeka Heights student residence exterior"
           fill
           className="object-cover"
