@@ -15,7 +15,7 @@ export const SITE_CONFIG = {
     country: "South Africa",
   },
   socials: {
-    facebook: "https://facebook.com/simekaheights",
+    facebook: "https://www.facebook.com/SimekaHeightsUnivenOffCampusResidence/",
   },
   operatingHours: {
     weekdays: "09:00 - 16:00",
@@ -35,4 +35,5 @@ export const NAV_LINKS = [
   { label: "Gallery", href: "/gallery" },
   { label: "Location", href: "/location" },
   { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
 ] as const;

@@ -31,7 +31,7 @@ const safetyFeatures = [
 
 export function SafetyHighlights() {
   const settings = useSiteSettings();
-  const safetyImage = settings?.homepageImages?.safetyImage || "/images/hero.png";
+  const safetyImage = settings?.homepageImages?.safetyImage || "/images/hero.jpg";
 
   return (
     <section className="overflow-hidden bg-navy py-20 md:py-28">

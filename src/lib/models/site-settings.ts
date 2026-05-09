@@ -78,7 +78,7 @@ const SiteSettingsSchema = new Schema<ISiteSettings>(
     },
 
     socials: {
-      facebook: { type: String, default: "https://facebook.com/simekaheights" },
+      facebook: { type: String, default: "https://www.facebook.com/SimekaHeightsUnivenOffCampusResidence/" },
       instagram: { type: String, default: "" },
       twitter: { type: String, default: "" },
       tiktok: { type: String, default: "" },
@@ -105,7 +105,7 @@ const SiteSettingsSchema = new Schema<ISiteSettings>(
         enabled: { type: Boolean, default: true },
         youtubeUrl: {
           type: String,
-          default: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+          default: "",
         },
         buttonText: { type: String, default: "Virtual Tour" },
       },

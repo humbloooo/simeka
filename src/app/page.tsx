@@ -34,7 +34,7 @@ export default function HomePage() {
       { "@type": "LocationFeatureSpecification", "name": "Sports Ground", "value": true }
     ],
     "numberOfRooms": 1040,
-    "priceRange": "ZAR 3200 - 7000"
+    "priceRange": "ZAR 3200 - 4200"
   };
 
   return (

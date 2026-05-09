@@ -5,7 +5,7 @@ import Link from "next/link";
 import { RevealOnScroll } from "@/components/effects/reveal-on-scroll";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Check, Users, Maximize2, ArrowRight, FileDown } from "lucide-react";
+import { Check, Users, Maximize2, ArrowRight } from "lucide-react";
 import { rooms } from "@/data/rooms";
 import { PageTransition } from "@/components/effects/page-transition";
 import { formatPrice } from "@/lib/utils";
@@ -119,14 +119,9 @@ export function RoomsContent() {
                         variant="outline"
                         className="border-amber/40 text-amber hover:bg-amber/10 font-semibold"
                       >
-                        <a
-                          href="/documents/simeka-heights-rooms.pdf"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <FileDown className="mr-2 h-4 w-4" />
-                          Download PDF
-                        </a>
+                        <Link href="/contact">
+                          Enquire Now
+                        </Link>
                       </Button>
                     </div>
                   </div>
@@ -135,30 +130,36 @@ export function RoomsContent() {
             ))}
           </div>
 
-          {/* Bottom-of-page PDF download CTA */}
+          {/* CTA */}
           <RevealOnScroll>
             <div className="mt-16 flex flex-col items-center text-center rounded-2xl border border-border/50 bg-muted/30 p-8 md:p-10">
               <h3 className="font-heading text-2xl md:text-3xl font-bold text-foreground">
-                Want all the details in one place?
+                Ready to secure your room?
               </h3>
               <p className="mt-2 text-muted-foreground max-w-xl">
-                Download the full Simeka Heights rooms brochure with floor plans, pricing,
-                and inclusions.
+                Apply online now or contact us to book a viewing. NSFAS-accredited rooms available for the next intake.
               </p>
-              <Button
-                asChild
-                size="lg"
-                className="mt-6 bg-amber hover:bg-amber-dim text-navy font-bold"
-              >
-                <a
-                  href="/documents/simeka-heights-rooms.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
+              <div className="mt-6 flex gap-4">
+                <Button
+                  asChild
+                  size="lg"
+                  className="bg-amber hover:bg-amber-dim text-navy font-bold"
                 >
-                  <FileDown className="mr-2 h-5 w-5" />
-                  Download Rooms Brochure
-                </a>
-              </Button>
+                  <Link href="/apply">
+                    Apply Now
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  size="lg"
+                  variant="outline"
+                  className="font-semibold"
+                >
+                  <Link href="/contact">
+                    Contact Us
+                  </Link>
+                </Button>
+              </div>
             </div>
           </RevealOnScroll>
         </div>

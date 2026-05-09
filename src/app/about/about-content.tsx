@@ -86,7 +86,7 @@ export function AboutContent() {
             <RevealOnScroll direction="right">
               <div className="relative rounded-2xl overflow-hidden shadow-xl">
                 <Image
-                  src="/images/study-lounge.png"
+                  src="/images/study-lounge.jpg"
                   alt="Students studying together at Simeka Heights"
                   width={700}
                   height={900}
@@ -147,13 +147,19 @@ export function AboutContent() {
                     className="group text-center"
                   >
                     <div className="relative h-80 w-full rounded-2xl overflow-hidden mb-4 shadow-md">
-                      <Image
-                        src={member.image}
-                        alt={member.name}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                        sizes="(max-width: 640px) 100vw, 400px"
-                      />
+                      {member.image ? (
+                        <Image
+                          src={member.image}
+                          alt={member.name}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-500"
+                          sizes="(max-width: 640px) 100vw, 400px"
+                        />
+                      ) : (
+                        <div className="flex h-full w-full items-center justify-center bg-navy/20 text-6xl font-bold text-amber/40">
+                          {member.name.charAt(0)}
+                        </div>
+                      )}
                       <div className="absolute inset-0 bg-gradient-to-t from-navy/60 to-transparent" />
                     </div>
                     <h3 className="font-heading font-bold text-foreground text-xl">

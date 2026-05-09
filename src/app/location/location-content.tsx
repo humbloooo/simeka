@@ -7,14 +7,14 @@ import { PageTransition } from "@/components/effects/page-transition";
 import { MapPin, GraduationCap, ShoppingBag, Stethoscope, Bus, Building2, Coffee, Utensils } from "lucide-react";
 
 const distances = [
-  { icon: GraduationCap, place: "UNIVEN Main Campus", distance: "2 min walk", detail: "150m from main gate" },
-  { icon: ShoppingBag, place: "Savanna Mall", distance: "10 min drive", detail: "Shopping, banking, restaurants" },
-  { icon: Building2, place: "Thohoyandou CBD", distance: "5 min drive", detail: "Town centre, post office" },
-  { icon: Stethoscope, place: "Tshilidzini Hospital", distance: "8 min drive", detail: "Major medical facility" },
-  { icon: Bus, place: "Taxi Rank", distance: "3 min walk", detail: "Local and long-distance transport" },
-  { icon: Coffee, place: "Student Hangouts", distance: "2 min walk", detail: "Cafes and takeaways nearby" },
-  { icon: Utensils, place: "Restaurants & Fast Food", distance: "5 min walk", detail: "Multiple dining options" },
-  { icon: MapPin, place: "UNIVEN Sports Grounds", distance: "5 min walk", detail: "Athletics and recreation" },
+  { icon: GraduationCap, place: "UNIVEN Main Campus", distance: "1.3 km", detail: "~15 min walk or free shuttle bus" },
+  { icon: ShoppingBag, place: "Thavhani Mall", distance: "5 km", detail: "Shopping, banking, restaurants" },
+  { icon: Building2, place: "Thohoyandou CBD", distance: "3 km", detail: "Town centre, post office, shops" },
+  { icon: Stethoscope, place: "Tshilidzini Hospital", distance: "8 km", detail: "Major medical facility" },
+  { icon: Bus, place: "Taxi Rank", distance: "3 km", detail: "Local and long-distance transport" },
+  { icon: Coffee, place: "Local Shops & Takeaways", distance: "Nearby", detail: "Convenience stores and food outlets" },
+  { icon: Utensils, place: "Restaurants & Fast Food", distance: "3–5 km", detail: "Multiple dining options in town" },
+  { icon: MapPin, place: "UNIVEN Sports Grounds", distance: "1.5 km", detail: "Athletics and recreation" },
 ];
 
 export function LocationContent() {
@@ -85,7 +85,7 @@ export function LocationContent() {
                 rich Venda culture, and growing commercial activity.
               </p>
               <p>
-                From the bustling Thohoyandou CBD to the modern Savanna Mall, you&apos;ll find
+                From the bustling Thohoyandou CBD to the modern Thavhani Mall, you&apos;ll find
                 everything you need close by. The town offers a unique blend of traditional culture
                 and modern convenience — making it the perfect place to study and grow.
               </p>

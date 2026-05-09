@@ -18,21 +18,31 @@ interface GalleryImage {
 }
 
 const images: GalleryImage[] = [
-  { id: "1", src: "/images/room-single.png", alt: "Modern student bedroom", category: "rooms" },
-  { id: "2", src: "/images/room-ensuite.png", alt: "Furnished single room", category: "rooms" },
-  { id: "3", src: "/images/room-single.png", alt: "Premium en-suite room", category: "rooms" },
-  { id: "4", src: "/images/room-ensuite.png", alt: "Clean modern bathroom", category: "rooms" },
-  { id: "5", src: "/images/room-single.png", alt: "Premium suite interior", category: "rooms" },
-  { id: "6", src: "/images/study-lounge.png", alt: "Study lounge area", category: "common" },
-  { id: "7", src: "/images/gym.png", alt: "Fitness centre", category: "common" },
-  { id: "8", src: "/images/study-lounge.png", alt: "Common lounge with TV", category: "common" },
-  { id: "9", src: "/images/hero.png", alt: "Building exterior", category: "exterior" },
-  { id: "10", src: "/images/hero.png", alt: "Modern building facade", category: "exterior" },
-  { id: "11", src: "/images/hero.png", alt: "Secure entrance", category: "exterior" },
-  { id: "12", src: "/images/braai-area.png", alt: "Students socializing outdoors", category: "social" },
-  { id: "13", src: "/images/braai-area.png", alt: "Study group session", category: "social" },
-  { id: "14", src: "/images/braai-area.png", alt: "Community braai event", category: "social" },
-  { id: "15", src: "/images/room-ensuite.png", alt: "Twin sharing room", category: "rooms" },
+  // Rooms
+  { id: "r1", src: "/simeka images/Rooms/DSC_4473.jpg.jpeg", alt: "Furnished single room interior", category: "rooms" },
+  { id: "r2", src: "/simeka images/Rooms/DSC_4433.jpg.jpeg", alt: "Student bedroom with study desk", category: "rooms" },
+  { id: "r3", src: "/simeka images/Rooms/DSC_4465_.jpg.jpeg", alt: "Room with wardrobe and bed", category: "rooms" },
+  { id: "r4", src: "/simeka images/Rooms/DSC_4663.jpg.jpeg", alt: "Twin sharing room setup", category: "rooms" },
+  { id: "r5", src: "/simeka images/Rooms/DSC_4673.jpg.jpeg", alt: "Room furnishings and storage", category: "rooms" },
+  { id: "r6", src: "/simeka images/Rooms/DSC_4697.jpg.jpeg", alt: "Study desk and chair area", category: "rooms" },
+  { id: "r7", src: "/simeka images/Rooms/DSC_4705.jpg.jpeg", alt: "Clean room interior view", category: "rooms" },
+  { id: "r8", src: "/simeka images/Rooms/DSC_0115.jpg.jpeg", alt: "Student accommodation bedroom", category: "rooms" },
+  // Common areas
+  { id: "c1", src: "/simeka images/Ammenities/DSC_0014.jpg.jpeg", alt: "Study lounge with desks", category: "common" },
+  { id: "c2", src: "/simeka images/Ammenities/DSC_0057.jpg.jpeg", alt: "Common area seating", category: "common" },
+  { id: "c3", src: "/simeka images/Ammenities/DSC_0092.jpg.jpeg", alt: "Recreational facilities", category: "common" },
+  { id: "c4", src: "/simeka images/Ammenities/DSC_4507.jpg.jpeg", alt: "Gym and fitness area", category: "common" },
+  { id: "c5", src: "/simeka images/Ammenities/DSC_4517.jpg.jpeg", alt: "Exercise equipment", category: "common" },
+  { id: "c6", src: "/simeka images/Ammenities/DSC_4566.jpg.jpeg", alt: "Outdoor braai and chill area", category: "common" },
+  { id: "c7", src: "/simeka images/Ammenities/DSC_4582.jpg.jpeg", alt: "Social gathering space", category: "common" },
+  // Exterior
+  { id: "e1", src: "/simeka images/backgrounds/DSC_4616-cropped-again.jpg.jpeg", alt: "Simeka Heights building exterior", category: "exterior" },
+  { id: "e2", src: "/simeka images/photos/DSC_0005.jpg.jpeg", alt: "Building entrance and grounds", category: "exterior" },
+  { id: "e3", src: "/simeka images/photos/DSC_0007.jpg.jpeg", alt: "Property exterior view", category: "exterior" },
+  { id: "e4", src: "/simeka images/photos/DSC_0067.jpg.jpeg", alt: "Outdoor walkway and gardens", category: "exterior" },
+  // Community
+  { id: "s1", src: "/simeka images/photos/DSC_0127.jpg.jpeg", alt: "Student community area", category: "social" },
+  { id: "s2", src: "/simeka images/photos/add-to-gallery-DSC_0006-1.jpg.jpeg", alt: "Campus life at Simeka Heights", category: "social" },
 ];
 
 const categoryLabels: Record<GalleryCategory, string> = {

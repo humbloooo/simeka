@@ -10,12 +10,13 @@ export function VideoTour() {
   const [isOpen, setIsOpen] = useState(false);
   const settings = useSiteSettings();
 
-  // If settings loaded and widget is disabled, hide it
+  // If settings loaded and widget is disabled, or no URL set, hide it
   if (settings && settings.widgets?.videoTour?.enabled === false) return null;
 
-  const youtubeUrl =
-    settings?.widgets?.videoTour?.youtubeUrl ||
-    "https://www.youtube.com/embed/dQw4w9WgXcQ";
+  const youtubeUrl = settings?.widgets?.videoTour?.youtubeUrl || "";
+
+  // Don't show the button if no video URL is configured
+  if (!youtubeUrl) return null;
   const buttonText =
     settings?.widgets?.videoTour?.buttonText || "Virtual Tour";
 

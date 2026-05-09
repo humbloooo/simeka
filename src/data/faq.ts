@@ -18,7 +18,7 @@ export const faqs: FAQItem[] = [
   // General
   {
     question: "How far is Simeka Heights from UNIVEN campus?",
-    answer: "Simeka Heights is located just a 2-minute walk from the main UNIVEN campus entrance. You can easily walk to lectures without needing transport.",
+    answer: "Simeka Heights is located approximately 1.3km from the UNIVEN campus — roughly a 15-minute walk or a quick 3-minute drive. Many students also use the free bus service we provide to and from campus.",
     category: "general",
   },
   {
@@ -76,7 +76,7 @@ export const faqs: FAQItem[] = [
   // Facilities
   {
     question: "Are the rooms furnished?",
-    answer: "Yes, all rooms come fully furnished with a bed, mattress, study desk, chair, wardrobe, and bookshelf. Premium rooms include additional items like a mini fridge and microwave.",
+    answer: "Yes, all rooms come fully furnished with a single bed and mattress, study desk and chair, desk lamp, wardrobe with bookshelf, kitchen sink with lockers, stove, refrigerator, and table with chairs.",
     category: "facilities",
   },
   {
@@ -91,7 +91,7 @@ export const faqs: FAQItem[] = [
   },
   {
     question: "Is parking available?",
-    answer: "Limited parking is available on a first-come, first-served basis at an additional monthly fee. Most students walk to campus given our proximity to UNIVEN.",
+    answer: "Yes, parking is available and included in your rental. Most students also use the free bus service to campus.",
     category: "facilities",
   },
   // Rules

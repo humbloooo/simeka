@@ -84,7 +84,7 @@ const DEFAULT_SETTINGS: Settings = {
     country: "South Africa",
   },
   socials: {
-    facebook: "https://facebook.com/simekaheights",
+    facebook: "https://www.facebook.com/SimekaHeightsUnivenOffCampusResidence/",
     instagram: "",
     twitter: "",
     tiktok: "",
@@ -104,7 +104,7 @@ const DEFAULT_SETTINGS: Settings = {
     },
     videoTour: {
       enabled: true,
-      youtubeUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      youtubeUrl: "",
       buttonText: "Virtual Tour",
     },
     scrollToTop: {
