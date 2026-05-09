@@ -6,10 +6,13 @@ import { RevealOnScroll } from "@/components/effects/reveal-on-scroll";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/constants";
+import { useSiteSettings } from "@/components/providers/site-settings-provider";
 
 export function CtaBanner() {
+  const settings = useSiteSettings();
   const nextYear = new Date().getFullYear() + 1;
-  const whatsappUrl = `https://wa.me/${SITE_CONFIG.whatsapp}?text=${encodeURIComponent(
+  const whatsappNumber = settings?.whatsapp || SITE_CONFIG.whatsapp;
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
     "Hi! I'd like to apply for accommodation at Simeka Heights."
   )}`;
 

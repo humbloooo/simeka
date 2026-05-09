@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import { PublicShell } from "@/components/layout/public-shell";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { GoogleTagManager, GoogleTagManagerNoScript } from "@/components/analytics/gtm";
 import "./globals.css";
 
 const heading = Plus_Jakarta_Sans({
@@ -118,7 +119,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en-ZA" className={`${heading.variable} ${inter.variable}`} suppressHydrationWarning>
+      <head>
+        <GoogleTagManager />
+      </head>
       <body className="min-h-screen bg-background text-foreground antialiased touch-manipulation pb-safe">
+        <GoogleTagManagerNoScript />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <PublicShell>{children}</PublicShell>
         </ThemeProvider>

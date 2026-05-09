@@ -4,35 +4,38 @@ import { RevealOnScroll } from "@/components/effects/reveal-on-scroll";
 import { Counter } from "@/components/effects/counter";
 import { ShieldCheck, Wifi, MapPin, Users } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/constants";
-
-const stats = [
-  {
-    icon: Users,
-    value: SITE_CONFIG.totalBeds,
-    suffix: "+",
-    label: "Beds Available",
-  },
-  {
-    icon: MapPin,
-    value: 1.3,
-    suffix: "km",
-    label: "From UNIVEN",
-  },
-  {
-    icon: ShieldCheck,
-    value: 24,
-    suffix: "/7",
-    label: "Security On-Site",
-  },
-  {
-    icon: Wifi,
-    value: 100,
-    suffix: "Mbps",
-    label: "Fibre WiFi",
-  },
-];
+import { useSiteSettings } from "@/components/providers/site-settings-provider";
 
 export function StatsBar() {
+  const settings = useSiteSettings();
+  const totalBeds = settings?.totalBeds || SITE_CONFIG.totalBeds;
+
+  const stats = [
+    {
+      icon: Users,
+      value: totalBeds,
+      suffix: "+",
+      label: "Beds Available",
+    },
+    {
+      icon: MapPin,
+      value: 1.3,
+      suffix: "km",
+      label: "From UNIVEN",
+    },
+    {
+      icon: ShieldCheck,
+      value: 24,
+      suffix: "/7",
+      label: "Security On-Site",
+    },
+    {
+      icon: Wifi,
+      value: 100,
+      suffix: "Mbps",
+      label: "Fibre WiFi",
+    },
+  ];
   return (
     <section className="relative z-10 mx-auto -mt-14 max-w-6xl px-4 sm:px-6 lg:-mt-16 lg:px-8">
       <RevealOnScroll>

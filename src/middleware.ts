@@ -2,14 +2,17 @@ import { NextRequest, NextResponse } from "next/server";
 import { jwtVerify } from "jose";
 
 const JWT_SECRET = new TextEncoder().encode(
-  process.env.JWT_SECRET || "simeka-heights-admin-secret-change-me"
+  process.env.JWT_SECRET || "dev-only-fallback-secret-not-for-production"
 );
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  // Only protect admin routes (except login)
-  if (pathname.startsWith("/admin") && !pathname.startsWith("/admin/login")) {
+  // Protect admin pages and API routes (except login/logout)
+  const isAdminRoute = pathname.startsWith("/admin") || pathname.startsWith("/api/admin");
+  const isAuthRoute = pathname.startsWith("/admin/login") || pathname.startsWith("/api/admin/login") || pathname.startsWith("/api/admin/logout");
+
+  if (isAdminRoute && !isAuthRoute) {
     const token = req.cookies.get("admin_token")?.value;
 
     if (!token) {
@@ -28,5 +31,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*"],
+  matcher: ["/admin/:path*", "/api/admin/:path*"],
 };

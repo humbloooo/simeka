@@ -13,41 +13,25 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Phone, Mail, MapPin, MessageCircle, Clock, Send, CheckCircle2, AlertCircle } from "lucide-react";
 import { enquirySchema, type EnquiryFormData } from "@/lib/validations";
 import { SITE_CONFIG } from "@/lib/constants";
-
-const contactInfo = [
-  {
-    icon: Phone,
-    label: "Landline",
-    value: SITE_CONFIG.phone,
-    href: `tel:${SITE_CONFIG.phone.replace(/\s/g, "")}`,
-  },
-  {
-    icon: Phone,
-    label: "Mobile",
-    value: SITE_CONFIG.mobile,
-    href: `tel:${SITE_CONFIG.mobile.replace(/\s/g, "")}`,
-  },
-  {
-    icon: Mail,
-    label: "Email",
-    value: SITE_CONFIG.email,
-    href: `mailto:${SITE_CONFIG.email}`,
-  },
-  {
-    icon: MessageCircle,
-    label: "WhatsApp",
-    value: "Chat with us",
-    href: `https://wa.me/${SITE_CONFIG.whatsapp}`,
-  },
-  {
-    icon: MapPin,
-    label: "Address",
-    value: `${SITE_CONFIG.address.street}, ${SITE_CONFIG.address.city}`,
-    href: "#",
-  },
-];
+import { useSiteSettings } from "@/components/providers/site-settings-provider";
 
 export function ContactContent() {
+  const settings = useSiteSettings();
+
+  const phone = settings?.phone || SITE_CONFIG.phone;
+  const mobile = settings?.mobile || SITE_CONFIG.mobile;
+  const email = settings?.email || SITE_CONFIG.email;
+  const whatsapp = settings?.whatsapp || SITE_CONFIG.whatsapp;
+  const address = settings?.address || SITE_CONFIG.address;
+  const hours = settings?.operatingHours || SITE_CONFIG.operatingHours;
+
+  const contactInfo = [
+    { icon: Phone, label: "Landline", value: phone, href: `tel:${phone.replace(/\s/g, "")}` },
+    { icon: Phone, label: "Mobile", value: mobile, href: `tel:${mobile.replace(/\s/g, "")}` },
+    { icon: Mail, label: "Email", value: email, href: `mailto:${email}` },
+    { icon: MessageCircle, label: "WhatsApp", value: "Chat with us", href: `https://wa.me/${whatsapp}` },
+    { icon: MapPin, label: "Address", value: `${address.street}, ${address.city}`, href: "#" },
+  ];
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -120,8 +104,9 @@ export function ContactContent() {
                     <h3 className="font-heading font-semibold text-sm">Office Hours</h3>
                   </div>
                   <div className="space-y-1 text-sm text-muted-foreground">
-                    <p>Mon - Fri: {SITE_CONFIG.operatingHours.weekdays}</p>
-                    <p>Sat - Sun: Closed</p>
+                    <p>Mon - Fri: {hours.weekdays}</p>
+                    <p>Saturday: {hours.saturday}</p>
+                    <p>Sunday: {hours.sunday}</p>
                   </div>
                 </div>
               </RevealOnScroll>
