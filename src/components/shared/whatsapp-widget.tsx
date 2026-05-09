@@ -3,11 +3,20 @@
 import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/constants";
+import { useSiteSettings } from "@/components/providers/site-settings-provider";
 
 export function WhatsAppWidget() {
-  const whatsappUrl = `https://wa.me/${SITE_CONFIG.whatsapp}?text=${encodeURIComponent(
-    "Hi! I'm interested in student accommodation at Simeka Heights. Can you send me more information?"
-  )}`;
+  const settings = useSiteSettings();
+
+  // If settings loaded and widget is disabled, hide it
+  if (settings && settings.widgets?.whatsapp?.enabled === false) return null;
+
+  const whatsappNumber = settings?.whatsapp || SITE_CONFIG.whatsapp;
+  const message =
+    settings?.widgets?.whatsapp?.message ||
+    "Hi! I'm interested in student accommodation at Simeka Heights. Can you send me more information?";
+
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
   return (
     <motion.a

@@ -10,6 +10,7 @@ import {
   MessageSquare,
   ImageIcon,
   Star,
+  Settings,
   LogOut,
   Menu,
   X,
@@ -22,6 +23,7 @@ const navItems = [
   { href: "/admin/enquiries", label: "Enquiries", icon: MessageSquare },
   { href: "/admin/gallery", label: "Gallery", icon: ImageIcon },
   { href: "/admin/testimonials", label: "Testimonials", icon: Star },
+  { href: "/admin/settings", label: "Site Settings", icon: Settings },
 ];
 
 export default function AdminLayout({

@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/footer";
 import { WhatsAppWidget } from "@/components/shared/whatsapp-widget";
 import { ScrollToTop } from "@/components/shared/scroll-to-top";
 import { VideoTour } from "@/components/shared/video-tour";
+import { SiteSettingsProvider } from "@/components/providers/site-settings-provider";
 
 export function PublicShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -16,13 +17,13 @@ export function PublicShell({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <>
+    <SiteSettingsProvider>
       <Navbar />
       <main className="min-h-screen">{children}</main>
       <Footer />
       <WhatsAppWidget />
       <VideoTour />
       <ScrollToTop />
-    </>
+    </SiteSettingsProvider>
   );
 }

@@ -11,11 +11,15 @@ import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/s
 import { NAV_LINKS, SITE_CONFIG } from "@/lib/constants";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { cn } from "@/lib/utils";
+import { useSiteSettings } from "@/components/providers/site-settings-provider";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const settings = useSiteSettings();
+
+  const phone = settings?.phone || SITE_CONFIG.phone;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -86,14 +90,14 @@ export function Navbar() {
         {/* Desktop CTA */}
         <div className="hidden lg:flex items-center gap-3">
           <a
-            href={`tel:${SITE_CONFIG.phone}`}
+            href={`tel:${phone.replace(/\s/g, "")}`}
             className={cn(
               "flex items-center gap-1.5 text-sm font-medium transition-colors",
               scrolled ? "text-foreground/70 hover:text-foreground" : "text-white/80 hover:text-white"
             )}
           >
             <Phone className="h-4 w-4" />
-            <span className="hidden xl:inline">{SITE_CONFIG.phone}</span>
+            <span className="hidden xl:inline">{phone}</span>
           </a>
           <ThemeToggle />
           <Button asChild className="bg-amber hover:bg-amber-dim text-navy font-semibold shadow-md hover-lift">
@@ -107,7 +111,7 @@ export function Navbar() {
         {/* Mobile Actions */}
         <div className="flex items-center gap-2 lg:hidden">
           <a
-            href={`tel:${SITE_CONFIG.phone.replace(/\s/g, "")}`}
+            href={`tel:${phone.replace(/\s/g, "")}`}
             className={cn(
               "touch-target rounded-full border transition-colors",
               scrolled
@@ -190,11 +194,11 @@ export function Navbar() {
                   </Link>
                 </Button>
                 <a
-                  href={`tel:${SITE_CONFIG.phone}`}
+                  href={`tel:${phone.replace(/\s/g, "")}`}
                   className="flex items-center justify-center gap-2 rounded-2xl border border-border/70 py-3 text-sm text-muted-foreground transition-colors hover:bg-muted/60 hover:text-foreground"
                 >
                   <Phone className="h-4 w-4" />
-                  {SITE_CONFIG.phone}
+                  {phone}
                 </a>
               </div>
             </div>

@@ -3,15 +3,22 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUp } from "lucide-react";
+import { useSiteSettings } from "@/components/providers/site-settings-provider";
 
 export function ScrollToTop() {
   const [show, setShow] = useState(false);
+  const settings = useSiteSettings();
+
+  const isDisabled = settings?.widgets?.scrollToTop?.enabled === false;
 
   useEffect(() => {
+    if (isDisabled) return;
     const onScroll = () => setShow(window.scrollY > 500);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [isDisabled]);
+
+  if (isDisabled) return null;
 
   return (
     <AnimatePresence>
