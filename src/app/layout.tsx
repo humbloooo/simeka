@@ -1,10 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, Inter } from "next/font/google";
-import { Navbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/footer";
-import { WhatsAppWidget } from "@/components/shared/whatsapp-widget";
-import { ScrollToTop } from "@/components/shared/scroll-to-top";
-import { VideoTour } from "@/components/shared/video-tour";
+import { PublicShell } from "@/components/layout/public-shell";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import "./globals.css";
 
@@ -124,12 +120,7 @@ export default function RootLayout({
     <html lang="en-ZA" className={`${heading.variable} ${inter.variable}`} suppressHydrationWarning>
       <body className="min-h-screen bg-background text-foreground antialiased touch-manipulation pb-safe">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <Navbar />
-          <main className="min-h-screen">{children}</main>
-          <Footer />
-          <WhatsAppWidget />
-          <VideoTour />
-          <ScrollToTop />
+          <PublicShell>{children}</PublicShell>
         </ThemeProvider>
       </body>
     </html>
