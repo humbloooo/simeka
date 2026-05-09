@@ -69,7 +69,7 @@ export function ContactContent() {
     <PageTransition>
       <section className="py-16 md:py-24 bg-background">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 sm:gap-12 lg:gap-16">
             {/* Contact Info */}
             <div className="lg:col-span-2">
               <RevealOnScroll>
@@ -83,7 +83,7 @@ export function ContactContent() {
                       href={item.href}
                       target={item.href.startsWith("http") ? "_blank" : undefined}
                       rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                      className="flex items-center gap-4 p-4 rounded-xl border border-border/50 bg-card hover:border-amber/30 hover:shadow-sm transition-all group"
+                      className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl border border-border/50 bg-card hover:border-amber/30 hover:shadow-sm transition-all group"
                     >
                       <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-amber/10 text-amber group-hover:bg-amber group-hover:text-navy transition-colors">
                         <item.icon className="h-5 w-5" />
@@ -98,7 +98,7 @@ export function ContactContent() {
                   ))}
                 </div>
 
-                <div className="mt-8 p-5 rounded-xl bg-muted/50 border border-border/50">
+                <div className="mt-6 sm:mt-8 p-4 sm:p-5 rounded-xl bg-muted/50 border border-border/50">
                   <div className="flex items-center gap-2 mb-2">
                     <Clock className="h-4 w-4 text-amber" />
                     <h3 className="font-heading font-semibold text-sm">Office Hours</h3>
@@ -119,7 +119,7 @@ export function ContactContent() {
                   <h2 className="font-heading text-2xl font-bold text-foreground mb-2">
                     Send Us an Enquiry
                   </h2>
-                  <p className="text-muted-foreground text-sm mb-8">
+                  <p className="text-muted-foreground text-sm mb-6 sm:mb-8">
                     Fill in the form below and we&apos;ll get back to you within 24 hours.
                   </p>
 

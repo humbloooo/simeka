@@ -13,8 +13,8 @@ export default function ApplyPage() {
   return (
     <>
       <PageHeader
-        title="Apply Now"
-        subtitle="Secure your spot at Simeka Heights. Complete the application form below and we'll be in touch."
+        title="Lock In Your Room"
+        subtitle="5 minutes. That's all it takes to apply. Fill in the form and we'll confirm your spot."
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Apply" },

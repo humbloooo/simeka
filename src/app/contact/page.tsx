@@ -55,7 +55,7 @@ export default function ContactPage() {
       />
       <PageHeader
         title="Contact Us"
-        subtitle="Have a question about rooms, pricing, or NSFAS? We'd love to hear from you."
+        subtitle="Questions about rooms, NSFAS, or availability? We respond within 24 hours — or chat us on WhatsApp right now."
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Contact" },

@@ -48,30 +48,36 @@ export function Hero() {
             </div>
 
             <h1 className="font-heading text-4xl font-extrabold leading-[0.98] tracking-tight text-white text-balance sm:text-5xl md:text-6xl lg:text-7xl">
-              Modern student living,
-              <span className="text-amber"> built around campus life.</span>
+              Your campus life
+              <span className="text-amber"> starts at your front door.</span>
             </h1>
 
             <p className="mt-6 max-w-2xl text-base leading-7 text-white/72 sm:text-lg md:text-xl md:leading-8">
-              Premium, fully furnished student accommodation with 24/7 security,
-              high-speed WiFi, and modern amenities just 1.3km from UNIVEN campus.
+              1,040+ beds. 1.3km from UNIVEN. Biometric security, fibre WiFi, and
+              a fully furnished room waiting for you. This is where focused students live.
             </p>
 
-            <div className="mt-8 grid gap-3 text-sm text-white/82 sm:grid-cols-3">
-              <div className="rounded-2xl border border-white/12 bg-white/8 px-4 py-3 backdrop-blur-sm">
-                <MapPin className="mb-2 h-4 w-4 text-amber" />
-                <p className="font-semibold text-white">1.3km from UNIVEN</p>
-                <p className="mt-1 text-white/58">Easy daily access to lectures and town.</p>
+            <div className="mt-6 grid gap-2.5 text-sm text-white/82 grid-cols-1 sm:grid-cols-3 sm:mt-8 sm:gap-3">
+              <div className="flex items-start gap-3 rounded-xl border border-white/12 bg-white/8 px-3 py-2.5 backdrop-blur-sm sm:flex-col sm:items-stretch sm:gap-0 sm:rounded-2xl sm:px-4 sm:py-3">
+                <MapPin className="h-4 w-4 shrink-0 text-amber mt-0.5 sm:mt-0 sm:mb-2" />
+                <div>
+                  <p className="font-semibold text-white text-sm">1.3km from UNIVEN</p>
+                  <p className="mt-0.5 text-white/58 text-xs sm:text-sm sm:mt-1">Walk to lectures. No excuses for missing class.</p>
+                </div>
               </div>
-              <div className="rounded-2xl border border-white/12 bg-white/8 px-4 py-3 backdrop-blur-sm">
-                <Wifi className="mb-2 h-4 w-4 text-amber" />
-                <p className="font-semibold text-white">Fast fibre WiFi</p>
-                <p className="mt-1 text-white/58">Built for study sessions, streaming, and research.</p>
+              <div className="flex items-start gap-3 rounded-xl border border-white/12 bg-white/8 px-3 py-2.5 backdrop-blur-sm sm:flex-col sm:items-stretch sm:gap-0 sm:rounded-2xl sm:px-4 sm:py-3">
+                <Wifi className="h-4 w-4 shrink-0 text-amber mt-0.5 sm:mt-0 sm:mb-2" />
+                <div>
+                  <p className="font-semibold text-white text-sm">Fast fibre WiFi</p>
+                  <p className="mt-0.5 text-white/58 text-xs sm:text-sm sm:mt-1">100Mbps uncapped. Study, stream, and submit on time.</p>
+                </div>
               </div>
-              <div className="rounded-2xl border border-white/12 bg-white/8 px-4 py-3 backdrop-blur-sm">
-                <BusFront className="mb-2 h-4 w-4 text-amber" />
-                <p className="font-semibold text-white">Student-friendly transport</p>
-                <p className="mt-1 text-white/58">Free UNIVEN shuttle support when you need it.</p>
+              <div className="flex items-start gap-3 rounded-xl border border-white/12 bg-white/8 px-3 py-2.5 backdrop-blur-sm sm:flex-col sm:items-stretch sm:gap-0 sm:rounded-2xl sm:px-4 sm:py-3">
+                <BusFront className="h-4 w-4 shrink-0 text-amber mt-0.5 sm:mt-0 sm:mb-2" />
+                <div>
+                  <p className="font-semibold text-white text-sm">Student-friendly transport</p>
+                  <p className="mt-0.5 text-white/58 text-xs sm:text-sm sm:mt-1">Free shuttle to campus. Get there without the hassle.</p>
+                </div>
               </div>
             </div>
 
@@ -118,7 +124,7 @@ export function Hero() {
           <div className="hidden lg:block">
             <div className="section-shell-dark p-6 text-white">
               <p className="text-sm uppercase tracking-[0.22em] text-white/45">
-                Why residents choose us
+                Why 1,040+ students chose us
               </p>
               <div className="mt-6 space-y-5">
                 <div className="border-b border-white/10 pb-5">
@@ -130,13 +136,13 @@ export function Hero() {
                 <div className="border-b border-white/10 pb-5">
                   <p className="font-heading text-3xl font-bold text-amber">Fully furnished</p>
                   <p className="mt-1 text-sm text-white/62">
-                    Move into a ready-to-live room built for student routines.
+                    Arrive with your bag. Everything else is already here.
                   </p>
                 </div>
                 <div>
                   <p className="font-heading text-3xl font-bold text-amber">Study + lifestyle</p>
                   <p className="mt-1 text-sm text-white/62">
-                    Gym, lounges, braai space, fast internet, and community support.
+                    Gym, braai, lounges, fibre WiFi — balance built in.
                   </p>
                 </div>
               </div>

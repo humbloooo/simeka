@@ -34,31 +34,30 @@ export function SafetyHighlights() {
   const safetyImage = settings?.homepageImages?.safetyImage || "/images/hero.jpg";
 
   return (
-    <section className="overflow-hidden bg-navy py-20 md:py-28">
+    <section className="overflow-hidden bg-navy py-14 sm:py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20">
+        <div className="grid grid-cols-1 items-center gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-20">
           <div>
             <RevealOnScroll>
               <span className="text-sm font-semibold uppercase tracking-widest text-primary">
-                Safety First
+                Zero Compromise
               </span>
-              <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-white md:text-4xl lg:text-5xl">
-                Your Safety Is Our{" "}
-                <span className="text-primary">Top Priority</span>
+              <h2 className="mt-3 font-heading text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl lg:text-5xl">
+                Security That Never{" "}
+                <span className="text-primary">Sleeps</span>
               </h2>
-              <p className="mt-5 max-w-xl text-lg leading-8 text-white/60">
-                We understand that parents and students need peace of mind. That is why
-                we have invested in comprehensive security infrastructure that supports
-                safe, focused daily living.
+              <p className="mt-4 sm:mt-5 max-w-xl text-sm sm:text-lg leading-relaxed sm:leading-8 text-white/60">
+                Zero security incidents this year. Biometric gates, CCTV at every angle,
+                and guards on-site around the clock. Your safety isn&apos;t a feature — it&apos;s the foundation.
               </p>
             </RevealOnScroll>
 
-            <div className="mt-10 space-y-6">
+            <div className="mt-6 sm:mt-10 space-y-3 sm:space-y-6">
               {safetyFeatures.map((feature, i) => (
                 <RevealOnScroll key={feature.title} delay={i * 0.1} direction="left">
                   <motion.div
                     whileHover={{ x: 4 }}
-                    className="section-shell-dark group flex items-start gap-4 p-5"
+                    className="section-shell-dark group flex items-start gap-3 sm:gap-4 p-3.5 sm:p-5"
                   >
                     <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
                       <feature.icon className="h-5 w-5" />
@@ -84,7 +83,7 @@ export function SafetyHighlights() {
                 alt="Simeka Heights security and safety features"
                 width={700}
                 height={900}
-                className="h-[500px] w-full object-cover md:h-[600px]"
+                className="h-[300px] w-full object-cover sm:h-[500px] md:h-[600px]"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-navy/60 to-transparent" />
@@ -94,10 +93,10 @@ export function SafetyHighlights() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.5 }}
-              className="absolute -bottom-4 left-4 rounded-[24px] bg-primary p-5 text-primary-foreground shadow-xl md:-bottom-6 md:-left-6"
+              className="absolute -bottom-3 left-3 rounded-2xl sm:rounded-[24px] bg-primary p-3.5 sm:p-5 text-primary-foreground shadow-xl md:-bottom-6 md:-left-6"
             >
-              <div className="font-heading text-3xl font-bold">0</div>
-              <div className="text-sm font-medium">
+              <div className="font-heading text-2xl sm:text-3xl font-bold">0</div>
+              <div className="text-xs sm:text-sm font-medium">
                 Security Incidents
                 <br />
                 This Year

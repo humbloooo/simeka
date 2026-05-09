@@ -37,23 +37,23 @@ export function StatsBar() {
     },
   ];
   return (
-    <section className="relative z-10 mx-auto -mt-14 max-w-6xl px-4 sm:px-6 lg:-mt-16 lg:px-8">
+    <section className="relative z-10 mx-auto -mt-10 max-w-6xl px-4 sm:-mt-14 sm:px-6 lg:-mt-16 lg:px-8">
       <RevealOnScroll>
-        <div className="section-shell grid grid-cols-2 gap-3 overflow-hidden p-3 md:grid-cols-4 md:gap-0 md:p-4">
+        <div className="section-shell grid grid-cols-2 gap-1 overflow-hidden p-2 sm:gap-3 sm:p-3 md:grid-cols-4 md:gap-0 md:p-4">
           {stats.map((stat, i) => (
             <div
               key={stat.label}
-              className={`rounded-2xl px-4 py-6 text-center md:py-7 ${
+              className={`rounded-xl px-3 py-4 text-center sm:rounded-2xl sm:px-4 sm:py-6 md:py-7 ${
                 i < stats.length - 1 ? "md:border-r md:border-border/50" : ""
               }`}
             >
-              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-amber/10 text-amber">
-                <stat.icon className="h-5 w-5" />
+              <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-amber/10 text-amber sm:mb-3 sm:h-12 sm:w-12 sm:rounded-2xl">
+                <stat.icon className="h-4 w-4 sm:h-5 sm:w-5" />
               </div>
-              <div className="font-heading text-2xl font-bold text-navy md:text-3xl">
+              <div className="font-heading text-xl font-bold text-navy sm:text-2xl md:text-3xl">
                 <Counter target={stat.value} suffix={stat.suffix} />
               </div>
-              <p className="mt-1 text-sm text-muted-foreground">{stat.label}</p>
+              <p className="mt-0.5 text-xs text-muted-foreground sm:mt-1 sm:text-sm">{stat.label}</p>
             </div>
           ))}
         </div>

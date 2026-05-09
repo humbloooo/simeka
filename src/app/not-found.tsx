@@ -15,14 +15,14 @@ export default function NotFound() {
           className="mx-auto mb-8 h-10 w-auto invert"
         />
 
-        <div className="font-heading text-[10rem] font-extrabold leading-none text-amber/15 mb-2 select-none">
+        <div className="font-heading text-[6rem] sm:text-[10rem] font-extrabold leading-none text-amber/15 mb-2 select-none">
           404
         </div>
 
-        <h1 className="font-heading text-3xl font-bold text-white mb-3 -mt-12">
+        <h1 className="font-heading text-2xl sm:text-3xl font-bold text-white mb-3 -mt-8 sm:-mt-12">
           Page Not Found
         </h1>
-        <p className="text-white/50 mb-10 text-lg">
+        <p className="text-white/50 mb-8 sm:mb-10 text-base sm:text-lg">
           The page you&apos;re looking for doesn&apos;t exist or has been moved.
           Let&apos;s get you back on track.
         </p>

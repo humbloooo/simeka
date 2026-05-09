@@ -43,7 +43,7 @@ export function AboutContent() {
       {/* Our Story */}
       <section className="py-16 md:py-24 bg-background">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
             <RevealOnScroll>
               <div>
                 <span className="text-amber font-semibold text-sm uppercase tracking-widest">
@@ -90,7 +90,7 @@ export function AboutContent() {
                   alt="Students studying together at Simeka Heights"
                   width={700}
                   height={900}
-                  className="object-cover w-full h-[450px] md:h-[550px]"
+                  className="object-cover w-full h-[300px] sm:h-[450px] md:h-[550px]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy/40 to-transparent" />
               </div>
@@ -112,10 +112,10 @@ export function AboutContent() {
               <RevealOnScroll key={value.title} delay={i * 0.15}>
                 <motion.div
                   whileHover={{ y: -4 }}
-                  className="bg-card rounded-2xl border border-border/50 p-8 text-center hover:shadow-lg transition-all duration-300"
+                  className="bg-card rounded-2xl border border-border/50 p-5 sm:p-8 text-center hover:shadow-lg transition-all duration-300"
                 >
-                  <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-amber/10 text-amber mx-auto mb-5">
-                    <value.icon className="h-7 w-7" />
+                  <div className="flex h-11 w-11 sm:h-14 sm:w-14 items-center justify-center rounded-xl bg-amber/10 text-amber mx-auto mb-3 sm:mb-5">
+                    <value.icon className="h-6 w-6 sm:h-7 sm:w-7" />
                   </div>
                   <h3 className="font-heading text-xl font-bold text-foreground mb-3">
                     {value.title}
@@ -146,7 +146,7 @@ export function AboutContent() {
                     whileHover={{ y: -4 }}
                     className="group text-center"
                   >
-                    <div className="relative h-80 w-full rounded-2xl overflow-hidden mb-4 shadow-md">
+                    <div className="relative h-64 sm:h-80 w-full rounded-2xl overflow-hidden mb-4 shadow-md">
                       {member.image ? (
                         <Image
                           src={member.image}

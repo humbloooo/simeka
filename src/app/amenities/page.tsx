@@ -14,7 +14,7 @@ export default function AmenitiesPage() {
     <>
       <PageHeader
         title="Amenities"
-        subtitle="Everything you need to study, live, and thrive — all under one roof."
+        subtitle="Gym, study lounges, braai area, fibre WiFi, backup power — every detail designed for student life."
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Amenities" },

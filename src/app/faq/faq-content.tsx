@@ -24,11 +24,11 @@ export function FaqContent() {
       <section className="py-16 md:py-24 bg-background">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           {/* Category filters */}
-          <RevealOnScroll className="flex flex-wrap justify-center gap-2 mb-12">
+          <RevealOnScroll className="flex flex-wrap justify-center gap-1.5 sm:gap-2 mb-8 sm:mb-12">
             <button
               onClick={() => setActiveCategory("all")}
               className={cn(
-                "px-4 py-2 rounded-lg text-sm font-medium transition-colors",
+                "px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors",
                 activeCategory === "all"
                   ? "bg-amber text-navy"
                   : "bg-muted text-muted-foreground hover:text-foreground"
@@ -41,7 +41,7 @@ export function FaqContent() {
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
                 className={cn(
-                  "px-4 py-2 rounded-lg text-sm font-medium transition-colors",
+                  "px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors",
                   activeCategory === cat
                     ? "bg-amber text-navy"
                     : "bg-muted text-muted-foreground hover:text-foreground"
@@ -58,7 +58,7 @@ export function FaqContent() {
               {filtered.map((faq, i) => (
                 <AccordionItem
                   key={i}
-                  className="border border-border/50 rounded-xl px-6 bg-card data-open:border-amber/30 data-open:shadow-sm transition-all"
+                  className="border border-border/50 rounded-xl px-4 sm:px-6 bg-card data-open:border-amber/30 data-open:shadow-sm transition-all"
                 >
                   <AccordionTrigger className="text-left font-heading font-semibold text-foreground hover:text-amber py-5 aria-expanded:text-amber">
                     {faq.question}
@@ -73,7 +73,7 @@ export function FaqContent() {
 
           {/* Still have questions */}
           <RevealOnScroll className="mt-16 text-center">
-            <div className="bg-muted/50 rounded-2xl border border-border/50 p-8 md:p-12">
+            <div className="bg-muted/50 rounded-2xl border border-border/50 p-6 sm:p-8 md:p-12">
               <h3 className="font-heading text-2xl font-bold text-foreground mb-3">
                 Still Have Questions?
               </h3>

@@ -16,15 +16,15 @@ export function RoomsContent() {
       {/* Room Cards */}
       <section className="py-16 md:py-24 bg-background">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="space-y-16">
+          <div className="space-y-10 sm:space-y-16">
             {rooms.map((room, i) => (
               <RevealOnScroll key={room.id} delay={i * 0.1}>
-                <div className={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center ${
+                <div className={`grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center ${
                   i % 2 !== 0 ? "lg:direction-rtl" : ""
                 }`}>
                   {/* Image */}
                   <div className={`relative rounded-2xl overflow-hidden shadow-lg ${i % 2 !== 0 ? "lg:order-2" : ""}`}>
-                    <div className="relative h-72 md:h-96">
+                    <div className="relative h-56 sm:h-72 md:h-96">
                       <Image
                         src={room.images[0]}
                         alt={room.name}
@@ -132,7 +132,7 @@ export function RoomsContent() {
 
           {/* CTA */}
           <RevealOnScroll>
-            <div className="mt-16 flex flex-col items-center text-center rounded-2xl border border-border/50 bg-muted/30 p-8 md:p-10">
+            <div className="mt-10 sm:mt-16 flex flex-col items-center text-center rounded-2xl border border-border/50 bg-muted/30 p-6 sm:p-8 md:p-10">
               <h3 className="font-heading text-2xl md:text-3xl font-bold text-foreground">
                 Ready to secure your room?
               </h3>

@@ -86,7 +86,7 @@ export function GalleryContent() {
       <section className="py-16 md:py-24 bg-background">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Filter Tabs */}
-          <RevealOnScroll className="flex justify-center mb-12">
+          <RevealOnScroll className="flex justify-center mb-8 sm:mb-12">
             <Tabs value={category} onValueChange={(v) => setCategory(v as GalleryCategory)}>
               <TabsList className="bg-muted/50">
                 {(Object.keys(categoryLabels) as GalleryCategory[]).map((cat) => (
@@ -147,24 +147,24 @@ export function GalleryContent() {
             {/* Close */}
             <button
               onClick={closeLightbox}
-              className="absolute top-6 right-6 text-white/70 hover:text-white z-10"
+              className="absolute top-4 right-4 sm:top-6 sm:right-6 text-white/70 hover:text-white z-10 p-2"
               aria-label="Close lightbox"
             >
-              <X className="h-8 w-8" />
+              <X className="h-7 w-7 sm:h-8 sm:w-8" />
             </button>
 
             {/* Counter */}
-            <div className="absolute top-6 left-6 text-white/50 text-sm">
+            <div className="absolute top-5 left-4 sm:top-6 sm:left-6 text-white/50 text-xs sm:text-sm">
               {lightbox + 1} / {filtered.length}
             </div>
 
             {/* Prev */}
             <button
               onClick={(e) => { e.stopPropagation(); prevImage(); }}
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white z-10"
+              className="absolute left-1 sm:left-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white z-10 p-2"
               aria-label="Previous image"
             >
-              <ChevronLeft className="h-10 w-10" />
+              <ChevronLeft className="h-8 w-8 sm:h-10 sm:w-10" />
             </button>
 
             {/* Image */}
@@ -174,7 +174,7 @@ export function GalleryContent() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.3 }}
-              className="relative max-w-5xl max-h-[85vh] mx-16"
+              className="relative max-w-5xl max-h-[85vh] mx-10 sm:mx-16"
               onClick={(e) => e.stopPropagation()}
             >
               <Image
@@ -190,10 +190,10 @@ export function GalleryContent() {
             {/* Next */}
             <button
               onClick={(e) => { e.stopPropagation(); nextImage(); }}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white z-10"
+              className="absolute right-1 sm:right-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white z-10 p-2"
               aria-label="Next image"
             >
-              <ChevronRight className="h-10 w-10" />
+              <ChevronRight className="h-8 w-8 sm:h-10 sm:w-10" />
             </button>
           </motion.div>
         )}

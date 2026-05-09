@@ -54,9 +54,9 @@ export function LocationContent() {
               <RevealOnScroll key={item.place} delay={i * 0.08}>
                 <motion.div
                   whileHover={{ y: -4 }}
-                  className="bg-card rounded-xl border border-border/50 p-6 hover:shadow-md hover:border-amber/20 transition-all duration-300"
+                  className="bg-card rounded-xl border border-border/50 p-4 sm:p-6 hover:shadow-md hover:border-amber/20 transition-all duration-300"
                 >
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-amber/10 text-amber mb-4">
+                  <div className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-lg bg-amber/10 text-amber mb-3 sm:mb-4">
                     <item.icon className="h-5 w-5" />
                   </div>
                   <h3 className="font-heading font-semibold text-foreground text-base mb-1">
@@ -78,7 +78,7 @@ export function LocationContent() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-6">
               Life in Thohoyandou
             </h2>
-            <div className="space-y-4 text-white/60 leading-relaxed text-lg">
+            <div className="space-y-4 text-white/60 leading-relaxed text-sm sm:text-lg">
               <p>
                 Thohoyandou is the vibrant heart of Vhembe District in Limpopo Province.
                 Home to the University of Venda, it&apos;s a town buzzing with student energy,

@@ -34,7 +34,7 @@ export default function FaqPage() {
       />
       <PageHeader
         title="Frequently Asked Questions"
-        subtitle="Got questions? We've got answers. Find everything you need to know about living at Simeka Heights."
+        subtitle="Everything you need to know before you apply — from NSFAS to WiFi to visitor policies."
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "FAQ" },

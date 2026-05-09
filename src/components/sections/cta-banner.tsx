@@ -17,7 +17,7 @@ export function CtaBanner() {
   )}`;
 
   return (
-    <section className="relative overflow-hidden py-20 md:py-28">
+    <section className="relative overflow-hidden py-14 sm:py-20 md:py-28">
       <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/80 to-primary" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.15),transparent_60%)]" />
 
@@ -33,15 +33,15 @@ export function CtaBanner() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-navy tracking-tight">
-              Secure Your Room for {nextYear}
+            <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-navy tracking-tight">
+              {nextYear} Rooms Are Filling Up
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-lg text-navy/70">
-              Spaces fill up fast. Don&apos;t miss out on premium student living
-              steps from UNIVEN campus. Apply today or chat with us.
+            <p className="mx-auto mt-3 sm:mt-4 max-w-xl text-sm sm:text-lg text-navy/70">
+              Every year, students who wait miss out. Apply now to lock in your
+              spot 1.3km from UNIVEN — or message us to ask anything.
             </p>
 
-            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <div className="mt-8 sm:mt-10 flex flex-col items-center justify-center gap-3 sm:gap-4 sm:flex-row">
               <Button
                 asChild
                 size="lg"

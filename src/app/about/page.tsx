@@ -14,7 +14,7 @@ export default function AboutPage() {
     <>
       <PageHeader
         title="About Simeka Heights"
-        subtitle="More than a residence — a community built on care, safety, and student success."
+        subtitle="Purpose-built by Mutodo Properties for UNIVEN students. 1,040 beds, zero compromises."
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "About" },

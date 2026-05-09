@@ -71,8 +71,8 @@ export function Footer() {
 
   return (
     <footer className="bg-navy text-white/80">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-[1.2fr_0.9fr_1fr_0.9fr]">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+        <div className="grid grid-cols-1 gap-8 sm:gap-12 md:grid-cols-2 lg:grid-cols-[1.2fr_0.9fr_1fr_0.9fr]">
           <div className="lg:col-span-1">
             <div className="flex items-center gap-2 mb-4">
               <Image
@@ -195,7 +195,7 @@ export function Footer() {
           </div>
         </div>
 
-        <Separator className="my-10 bg-white/10" />
+        <Separator className="my-6 sm:my-10 bg-white/10" />
 
         <div className="flex flex-col gap-4 text-center text-xs text-white/40 lg:flex-row lg:items-center lg:justify-between lg:text-left">
           <p className="max-w-md">

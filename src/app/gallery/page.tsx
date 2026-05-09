@@ -14,7 +14,7 @@ export default function GalleryPage() {
     <>
       <PageHeader
         title="Gallery"
-        subtitle="See what life at Simeka Heights looks like. Explore our rooms, amenities, and community spaces."
+        subtitle="Don't just take our word for it — see the rooms, the spaces, and the lifestyle for yourself."
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Gallery" },

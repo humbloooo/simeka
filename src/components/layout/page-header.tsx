@@ -16,7 +16,7 @@ export function PageHeader({ title, subtitle, breadcrumbs, className }: PageHead
   return (
     <section
       className={cn(
-        "relative overflow-hidden bg-navy pb-16 pt-30 md:pb-20 md:pt-38",
+        "relative overflow-hidden bg-navy pb-12 pt-24 sm:pb-16 sm:pt-30 md:pb-20 md:pt-38",
         className
       )}
     >
@@ -54,7 +54,7 @@ export function PageHeader({ title, subtitle, breadcrumbs, className }: PageHead
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="font-heading text-4xl font-bold tracking-tight text-white text-balance md:text-5xl lg:text-6xl"
+          className="font-heading text-3xl font-bold tracking-tight text-white text-balance sm:text-4xl md:text-5xl lg:text-6xl"
         >
           {title}
         </motion.h1>

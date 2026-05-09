@@ -14,7 +14,7 @@ export default function LocationPage() {
     <>
       <PageHeader
         title="Our Location"
-        subtitle="Right where you need to be — steps from UNIVEN campus and everything Thohoyandou has to offer."
+        subtitle="1.3km from UNIVEN. 5km from Thavhani Mall. Close to everything that matters."
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Location" },

@@ -89,13 +89,13 @@ export function ApplicationForm() {
       <section className="py-16 md:py-24 bg-background">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           {/* Step Indicator */}
-          <div className="flex items-center justify-between mb-12">
+          <div className="flex items-center justify-between mb-8 sm:mb-12">
             {steps.map((s, i) => (
               <div key={s.label} className="flex items-center">
                 <div className="flex flex-col items-center">
                   <div
                     className={cn(
-                      "flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold transition-all",
+                      "flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full text-xs sm:text-sm font-bold transition-all",
                       i < step
                         ? "bg-success text-white"
                         : i === step
@@ -103,10 +103,10 @@ export function ApplicationForm() {
                           : "bg-muted text-muted-foreground"
                     )}
                   >
-                    {i < step ? <Check className="h-5 w-5" /> : <s.icon className="h-5 w-5" />}
+                    {i < step ? <Check className="h-4 w-4 sm:h-5 sm:w-5" /> : <s.icon className="h-4 w-4 sm:h-5 sm:w-5" />}
                   </div>
                   <span className={cn(
-                    "text-xs mt-2 font-medium hidden sm:block",
+                    "text-[10px] sm:text-xs mt-1.5 sm:mt-2 font-medium",
                     i <= step ? "text-foreground" : "text-muted-foreground"
                   )}>
                     {s.label}
@@ -114,7 +114,7 @@ export function ApplicationForm() {
                 </div>
                 {i < steps.length - 1 && (
                   <div className={cn(
-                    "h-0.5 w-8 sm:w-16 mx-1 sm:mx-2 transition-colors",
+                    "h-0.5 w-4 sm:w-16 mx-0.5 sm:mx-2 transition-colors",
                     i < step ? "bg-success" : "bg-muted"
                   )} />
                 )}

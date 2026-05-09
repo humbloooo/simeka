@@ -38,11 +38,11 @@ export function TestimonialsCarousel() {
 
   if (loading) {
     return (
-      <section className="bg-background py-20 md:py-28">
+      <section className="bg-background py-14 sm:py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            title="What Our Residents Say"
-            subtitle="Don't just take our word for it. Hear from students who call Simeka Heights home."
+            title="Straight From the Residents"
+            subtitle="Real students, real words. Here's what living at Simeka Heights actually feels like."
           />
           <div className="mx-auto max-w-4xl">
             <div className="rounded-[28px] border border-border/50 bg-card p-12 text-center">
@@ -56,11 +56,11 @@ export function TestimonialsCarousel() {
 
   if (testimonials.length === 0) {
     return (
-      <section className="bg-background py-20 md:py-28">
+      <section className="bg-background py-14 sm:py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            title="What Our Residents Say"
-            subtitle="Don't just take our word for it. Hear from students who call Simeka Heights home."
+            title="Straight From the Residents"
+            subtitle="Real students, real words. Here's what living at Simeka Heights actually feels like."
           />
           <div className="mx-auto max-w-2xl text-center">
             <div className="rounded-[28px] border border-border/50 bg-card p-10">
@@ -82,7 +82,7 @@ export function TestimonialsCarousel() {
     setCurrent((prev) => (prev - 1 + testimonials.length) % testimonials.length);
 
   return (
-    <section className="bg-background py-20 md:py-28">
+    <section className="bg-background py-14 sm:py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           title="What Our Residents Say"
@@ -90,8 +90,8 @@ export function TestimonialsCarousel() {
         />
 
         <RevealOnScroll className="mx-auto max-w-4xl">
-          <div className="relative rounded-[28px] border border-border/50 bg-card p-8 shadow-[0_20px_60px_-46px_rgba(15,27,45,0.5)] md:p-12">
-            <Quote className="absolute left-6 top-6 h-10 w-10 text-primary/20" />
+          <div className="relative rounded-2xl sm:rounded-[28px] border border-border/50 bg-card p-5 sm:p-8 shadow-[0_20px_60px_-46px_rgba(15,27,45,0.5)] md:p-12">
+            <Quote className="absolute left-4 top-4 h-8 w-8 sm:left-6 sm:top-6 sm:h-10 sm:w-10 text-primary/20" />
 
             <AnimatePresence mode="wait">
               <motion.div
@@ -102,19 +102,19 @@ export function TestimonialsCarousel() {
                 transition={{ duration: 0.4 }}
                 className="text-center"
               >
-                <div className="mb-6 flex justify-center gap-1">
+                <div className="mb-4 sm:mb-6 flex justify-center gap-1">
                   {Array.from({ length: testimonial.rating }).map((_, i) => (
-                    <Star key={i} className="h-5 w-5 fill-primary text-primary" />
+                    <Star key={i} className="h-4 w-4 sm:h-5 sm:w-5 fill-primary text-primary" />
                   ))}
                 </div>
 
-                <blockquote className="mb-8 text-lg italic leading-8 text-foreground/80 md:text-xl">
+                <blockquote className="mb-6 sm:mb-8 text-base sm:text-lg italic leading-7 sm:leading-8 text-foreground/80 md:text-xl">
                   &ldquo;{testimonial.quote}&rdquo;
                 </blockquote>
 
-                <div className="flex items-center justify-center gap-4">
+                <div className="flex items-center justify-center gap-3 sm:gap-4">
                   {testimonial.photoUrl ? (
-                    <div className="relative h-14 w-14 overflow-hidden rounded-full border-2 border-primary/30">
+                    <div className="relative h-11 w-11 sm:h-14 sm:w-14 overflow-hidden rounded-full border-2 border-primary/30">
                       <Image
                         src={testimonial.photoUrl}
                         alt={testimonial.name}
@@ -124,7 +124,7 @@ export function TestimonialsCarousel() {
                       />
                     </div>
                   ) : (
-                    <div className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-primary/30 bg-primary/10 text-primary font-bold text-lg">
+                    <div className="flex h-11 w-11 sm:h-14 sm:w-14 items-center justify-center rounded-full border-2 border-primary/30 bg-primary/10 text-primary font-bold text-base sm:text-lg">
                       {testimonial.name.charAt(0)}
                     </div>
                   )}

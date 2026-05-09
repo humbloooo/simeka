@@ -14,7 +14,7 @@ export default function RoomsPage() {
     <>
       <PageHeader
         title="Rooms & Pricing"
-        subtitle="From budget-friendly sharing to private single rooms — find the perfect space for your university journey."
+        subtitle="Two room types. Both fully furnished. Both NSFAS-accepted. Choose what fits your budget and your style."
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Rooms & Pricing" },
