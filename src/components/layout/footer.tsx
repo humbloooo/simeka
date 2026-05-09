@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { MapPin, Phone, Mail } from "lucide-react";
 import { SITE_CONFIG, NAV_LINKS } from "@/lib/constants";
 import { Separator } from "@/components/ui/separator";
@@ -14,17 +15,13 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-[1.2fr_0.9fr_1fr_0.9fr]">
           <div className="lg:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-amber text-navy font-heading font-bold text-lg">
-                SH
-              </div>
-              <div className="flex flex-col">
-                <span className="font-heading font-bold text-lg text-white leading-tight">
-                  Simeka Heights
-                </span>
-                <span className="text-[10px] uppercase tracking-widest text-white/50 leading-tight">
-                  Student Residence
-                </span>
-              </div>
+              <Image
+                src="/images/logo-small.png"
+                alt="Simeka Heights Logo"
+                width={140}
+                height={70}
+                className="h-10 w-auto invert"
+              />
             </div>
             <p className="text-sm text-white/60 leading-relaxed mb-6">
               Premium NSFAS-accredited student accommodation steps from UNIVEN campus.

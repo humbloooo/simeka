@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone, ArrowRight } from "lucide-react";
@@ -37,23 +38,17 @@ export function Navbar() {
       <nav className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-amber text-navy font-heading font-bold text-lg">
-            SH
-          </div>
-          <div className="flex flex-col">
-            <span className={cn(
-              "font-heading font-bold text-lg leading-tight transition-colors",
-              scrolled ? "text-foreground" : "text-white"
-            )}>
-              Simeka Heights
-            </span>
-            <span className={cn(
-              "text-[10px] uppercase tracking-widest leading-tight transition-colors",
-              scrolled ? "text-muted-foreground" : "text-white/60"
-            )}>
-              Student Residence
-            </span>
-          </div>
+          <Image
+            src="/images/logo-small.png"
+            alt="Simeka Heights Logo"
+            width={140}
+            height={70}
+            className={cn(
+              "h-10 w-auto transition-all",
+              scrolled ? "brightness-100 dark:invert" : "brightness-0 invert"
+            )}
+            priority
+          />
         </Link>
 
         {/* Desktop Nav */}
@@ -152,15 +147,13 @@ export function Navbar() {
             <div className="flex flex-col h-full">
               {/* Mobile Logo */}
               <div className="flex items-center gap-3 border-b border-border/50 px-6 py-5">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-amber text-navy font-heading font-bold text-lg">
-                  SH
-                </div>
-                <div className="flex flex-col">
-                  <span className="font-heading font-bold text-lg leading-tight">Simeka Heights</span>
-                  <span className="text-[10px] uppercase tracking-widest text-muted-foreground leading-tight">
-                    Student Residence
-                  </span>
-                </div>
+                <Image
+                  src="/images/logo-small.png"
+                  alt="Simeka Heights Logo"
+                  width={140}
+                  height={70}
+                  className="h-10 w-auto dark:invert"
+                />
               </div>
 
               {/* Mobile Links */}

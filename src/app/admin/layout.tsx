@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import {
   LayoutDashboard,
@@ -65,9 +66,13 @@ export default function AdminLayout({
         }`}
       >
         <div className="flex h-16 items-center gap-3 border-b border-white/10 px-5">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-amber text-navy font-bold text-sm">
-            SH
-          </div>
+          <Image
+            src="/favicon.png"
+            alt="Simeka Heights"
+            width={32}
+            height={32}
+            className="h-8 w-8 rounded"
+          />
           <div>
             <p className="text-sm font-bold text-white leading-tight">Simeka Heights</p>
             <p className="text-[10px] uppercase tracking-widest text-white/40">Admin Panel</p>
