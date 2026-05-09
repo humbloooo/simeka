@@ -31,6 +31,21 @@ yarn-error.log*
 # vercel
 .vercel
 
+# claude
+.claude/
+
+# misc project files
+status.txt
+AGENTS.md
+CLAUDE.md
+
+# Next.js boilerplate SVGs
+public/file.svg
+public/globe.svg
+public/next.svg
+public/vercel.svg
+public/window.svg
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
