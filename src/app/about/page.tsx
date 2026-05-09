@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "About Us",
   description:
     "Learn about Simeka Heights — our story, mission, values, and the team dedicated to providing premium student accommodation near UNIVEN in Thohoyandou.",
+  alternates: { canonical: "https://simekaheights.com/about" },
 };
 
 export default function AboutPage() {

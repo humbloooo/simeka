@@ -106,7 +106,11 @@ export default function EnquiriesPage() {
                     )}
                     <span className="flex items-center gap-1">
                       <Clock className="h-3.5 w-3.5" />
-                      {new Date(enq.createdAt).toLocaleDateString("en-ZA")}
+                      {new Date(enq.createdAt).toLocaleDateString("en-ZA", {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric",
+                      })}
                     </span>
                   </div>
                 </div>

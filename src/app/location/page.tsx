@@ -5,7 +5,8 @@ import { LocationContent } from "./location-content";
 export const metadata: Metadata = {
   title: "Location",
   description:
-    "Simeka Heights is located on University Road, Thohoyandou — a 2-minute walk from UNIVEN campus. Find distances to shops, clinics, and transport.",
+    "Simeka Heights is located in Thohoyandou — 1.3km from UNIVEN campus with free shuttle service. Find distances to shops, clinics, and transport.",
+  alternates: { canonical: "https://simekaheights.com/location" },
 };
 
 export default function LocationPage() {

@@ -5,8 +5,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/api/"],
+      disallow: ["/api/", "/admin/"],
     },
-    sitemap: "https://simekaheights.co.za/sitemap.xml",
+    sitemap: "https://simekaheights.com/sitemap.xml",
   };
 }

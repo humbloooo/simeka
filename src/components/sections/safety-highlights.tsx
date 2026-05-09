@@ -85,6 +85,7 @@ export function SafetyHighlights() {
                 width={700}
                 height={900}
                 className="h-[500px] w-full object-cover md:h-[600px]"
+                sizes="(max-width: 1024px) 100vw, 50vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-navy/60 to-transparent" />
             </div>

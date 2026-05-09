@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Gallery",
   description:
     "Take a virtual tour of Simeka Heights student residence. View our rooms, common areas, gym, study lounges, and outdoor spaces near UNIVEN.",
+  alternates: { canonical: "https://simekaheights.com/gallery" },
 };
 
 export default function GalleryPage() {

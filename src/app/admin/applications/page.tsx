@@ -8,6 +8,7 @@ import {
   ChevronRight,
   Eye,
   X,
+  Download,
 } from "lucide-react";
 
 interface Application {
@@ -36,6 +37,23 @@ const statusColors: Record<string, string> = {
 
 const statuses = ["all", "pending", "reviewing", "approved", "rejected", "waitlisted"];
 
+function formatDate(dateStr: string) {
+  const d = new Date(dateStr);
+  const now = new Date();
+  const diffMs = now.getTime() - d.getTime();
+  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+  if (diffDays === 0) return "Today";
+  if (diffDays === 1) return "Yesterday";
+  if (diffDays < 7) return `${diffDays} days ago`;
+
+  return d.toLocaleDateString("en-ZA", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+}
+
 export default function ApplicationsPage() {
   const [applications, setApplications] = useState<Application[]>([]);
   const [loading, setLoading] = useState(true);
@@ -45,6 +63,7 @@ export default function ApplicationsPage() {
   const [status, setStatus] = useState("all");
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState<Application | null>(null);
+  const [exporting, setExporting] = useState(false);
 
   const fetchApplications = useCallback(async () => {
     setLoading(true);
@@ -79,13 +98,93 @@ export default function ApplicationsPage() {
     }
   };
 
+  const exportCsv = async () => {
+    setExporting(true);
+    try {
+      // Fetch ALL applications (no pagination)
+      const params = new URLSearchParams({ page: "1", limit: "10000", status });
+      if (search) params.set("search", search);
+      const res = await fetch(`/api/admin/applications?${params}`);
+      const data = await res.json();
+      const apps: Application[] = data.applications || [];
+
+      if (apps.length === 0) {
+        alert("No applications to export.");
+        return;
+      }
+
+      const headers = [
+        "Full Name",
+        "Email",
+        "Phone",
+        "Student Number",
+        "Year of Study",
+        "Faculty",
+        "Room Type",
+        "Funding Source",
+        "NSFAS Ref",
+        "Status",
+        "Applied Date",
+      ];
+
+      const rows = apps.map((a) => [
+        a.fullName,
+        a.email,
+        a.phone,
+        a.studentNumber,
+        String(a.yearOfStudy),
+        a.faculty,
+        a.roomType,
+        a.fundingSource,
+        a.nsfasRef || "",
+        a.status,
+        new Date(a.createdAt).toLocaleDateString("en-ZA"),
+      ]);
+
+      const csvContent = [
+        headers.join(","),
+        ...rows.map((row) =>
+          row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(",")
+        ),
+      ].join("\n");
+
+      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `simeka-applications-${new Date().toISOString().slice(0, 10)}.csv`;
+      link.click();
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error(err);
+      alert("Failed to export.");
+    } finally {
+      setExporting(false);
+    }
+  };
+
   return (
     <div>
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-white">Applications</h1>
-        <p className="mt-1 text-sm text-white/50">
-          {total} total application{total !== 1 ? "s" : ""}
-        </p>
+      <div className="mb-6 flex items-start justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold text-white">Applications</h1>
+          <p className="mt-1 text-sm text-white/50">
+            {total} total application{total !== 1 ? "s" : ""}
+          </p>
+        </div>
+        <button
+          onClick={exportCsv}
+          disabled={exporting}
+          className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-white/70 transition-colors hover:bg-white/10 hover:text-white disabled:opacity-50"
+          aria-label="Export applications to CSV"
+        >
+          {exporting ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          ) : (
+            <Download className="h-4 w-4" />
+          )}
+          Export CSV
+        </button>
       </div>
 
       {/* Filters */}
@@ -141,7 +240,7 @@ export default function ApplicationsPage() {
                 <th className="px-4 py-3">Room Type</th>
                 <th className="px-4 py-3">Funding</th>
                 <th className="px-4 py-3">Status</th>
-                <th className="px-4 py-3">Date</th>
+                <th className="px-4 py-3">Applied</th>
                 <th className="px-4 py-3">Actions</th>
               </tr>
             </thead>
@@ -163,13 +262,14 @@ export default function ApplicationsPage() {
                       {app.status}
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-white/40">
-                    {new Date(app.createdAt).toLocaleDateString("en-ZA")}
+                  <td className="px-4 py-3 text-white/40" title={new Date(app.createdAt).toLocaleString("en-ZA")}>
+                    {formatDate(app.createdAt)}
                   </td>
                   <td className="px-4 py-3">
                     <button
                       onClick={() => setSelected(app)}
                       className="rounded-lg p-1.5 text-white/40 hover:bg-white/10 hover:text-amber"
+                      aria-label={`View details for ${app.fullName}`}
                     >
                       <Eye className="h-4 w-4" />
                     </button>
@@ -192,6 +292,7 @@ export default function ApplicationsPage() {
               onClick={() => setPage((p) => Math.max(1, p - 1))}
               disabled={page === 1}
               className="rounded-lg border border-white/10 p-2 text-white/50 hover:text-white disabled:opacity-30"
+              aria-label="Previous page"
             >
               <ChevronLeft className="h-4 w-4" />
             </button>
@@ -199,6 +300,7 @@ export default function ApplicationsPage() {
               onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
               disabled={page === totalPages}
               className="rounded-lg border border-white/10 p-2 text-white/50 hover:text-white disabled:opacity-30"
+              aria-label="Next page"
             >
               <ChevronRight className="h-4 w-4" />
             </button>
@@ -208,7 +310,12 @@ export default function ApplicationsPage() {
 
       {/* Detail Modal */}
       {selected && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-label={`Application details for ${selected.fullName}`}
+        >
           <div className="w-full max-w-lg rounded-2xl border border-white/10 bg-[#0d1b2a] p-6 max-h-[80vh] overflow-y-auto">
             <div className="flex items-start justify-between mb-4">
               <div>
@@ -218,6 +325,7 @@ export default function ApplicationsPage() {
               <button
                 onClick={() => setSelected(null)}
                 className="rounded-lg p-1 text-white/40 hover:text-white"
+                aria-label="Close modal"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -240,6 +348,8 @@ export default function ApplicationsPage() {
                     year: "numeric",
                     month: "long",
                     day: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
                   })}
                 />
               </div>

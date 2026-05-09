@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Apply Now",
   description:
     "Apply for student accommodation at Simeka Heights near UNIVEN. NSFAS accredited. Secure your room for the upcoming academic year.",
+  alternates: { canonical: "https://simekaheights.com/apply" },
 };
 
 export default function ApplyPage() {

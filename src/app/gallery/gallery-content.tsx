@@ -19,30 +19,30 @@ interface GalleryImage {
 
 const images: GalleryImage[] = [
   // Rooms
-  { id: "r1", src: "/simeka images/Rooms/DSC_4473.jpg.jpeg", alt: "Furnished single room interior", category: "rooms" },
-  { id: "r2", src: "/simeka images/Rooms/DSC_4433.jpg.jpeg", alt: "Student bedroom with study desk", category: "rooms" },
-  { id: "r3", src: "/simeka images/Rooms/DSC_4465_.jpg.jpeg", alt: "Room with wardrobe and bed", category: "rooms" },
-  { id: "r4", src: "/simeka images/Rooms/DSC_4663.jpg.jpeg", alt: "Twin sharing room setup", category: "rooms" },
-  { id: "r5", src: "/simeka images/Rooms/DSC_4673.jpg.jpeg", alt: "Room furnishings and storage", category: "rooms" },
-  { id: "r6", src: "/simeka images/Rooms/DSC_4697.jpg.jpeg", alt: "Study desk and chair area", category: "rooms" },
-  { id: "r7", src: "/simeka images/Rooms/DSC_4705.jpg.jpeg", alt: "Clean room interior view", category: "rooms" },
-  { id: "r8", src: "/simeka images/Rooms/DSC_0115.jpg.jpeg", alt: "Student accommodation bedroom", category: "rooms" },
+  { id: "r1", src: "/simeka images/Rooms/DSC_4473.jpeg", alt: "Furnished single room interior", category: "rooms" },
+  { id: "r2", src: "/simeka images/Rooms/DSC_4433.jpeg", alt: "Student bedroom with study desk", category: "rooms" },
+  { id: "r3", src: "/simeka images/Rooms/DSC_4465_.jpeg", alt: "Room with wardrobe and bed", category: "rooms" },
+  { id: "r4", src: "/simeka images/Rooms/DSC_4663.jpeg", alt: "Twin sharing room setup", category: "rooms" },
+  { id: "r5", src: "/simeka images/Rooms/DSC_4673.jpeg", alt: "Room furnishings and storage", category: "rooms" },
+  { id: "r6", src: "/simeka images/Rooms/DSC_4697.jpeg", alt: "Study desk and chair area", category: "rooms" },
+  { id: "r7", src: "/simeka images/Rooms/DSC_4705.jpeg", alt: "Clean room interior view", category: "rooms" },
+  { id: "r8", src: "/simeka images/Rooms/DSC_0115.jpeg", alt: "Student accommodation bedroom", category: "rooms" },
   // Common areas
-  { id: "c1", src: "/simeka images/Ammenities/DSC_0014.jpg.jpeg", alt: "Study lounge with desks", category: "common" },
-  { id: "c2", src: "/simeka images/Ammenities/DSC_0057.jpg.jpeg", alt: "Common area seating", category: "common" },
-  { id: "c3", src: "/simeka images/Ammenities/DSC_0092.jpg.jpeg", alt: "Recreational facilities", category: "common" },
-  { id: "c4", src: "/simeka images/Ammenities/DSC_4507.jpg.jpeg", alt: "Gym and fitness area", category: "common" },
-  { id: "c5", src: "/simeka images/Ammenities/DSC_4517.jpg.jpeg", alt: "Exercise equipment", category: "common" },
-  { id: "c6", src: "/simeka images/Ammenities/DSC_4566.jpg.jpeg", alt: "Outdoor braai and chill area", category: "common" },
-  { id: "c7", src: "/simeka images/Ammenities/DSC_4582.jpg.jpeg", alt: "Social gathering space", category: "common" },
+  { id: "c1", src: "/simeka images/Ammenities/DSC_0014.jpeg", alt: "Study lounge with desks", category: "common" },
+  { id: "c2", src: "/simeka images/Ammenities/DSC_0057.jpeg", alt: "Common area seating", category: "common" },
+  { id: "c3", src: "/simeka images/Ammenities/DSC_0092.jpeg", alt: "Recreational facilities", category: "common" },
+  { id: "c4", src: "/simeka images/Ammenities/DSC_4507.jpeg", alt: "Gym and fitness area", category: "common" },
+  { id: "c5", src: "/simeka images/Ammenities/DSC_4517.jpeg", alt: "Exercise equipment", category: "common" },
+  { id: "c6", src: "/simeka images/Ammenities/DSC_4566.jpeg", alt: "Outdoor braai and chill area", category: "common" },
+  { id: "c7", src: "/simeka images/Ammenities/DSC_4582.jpeg", alt: "Social gathering space", category: "common" },
   // Exterior
-  { id: "e1", src: "/simeka images/backgrounds/DSC_4616-cropped-again.jpg.jpeg", alt: "Simeka Heights building exterior", category: "exterior" },
-  { id: "e2", src: "/simeka images/photos/DSC_0005.jpg.jpeg", alt: "Building entrance and grounds", category: "exterior" },
-  { id: "e3", src: "/simeka images/photos/DSC_0007.jpg.jpeg", alt: "Property exterior view", category: "exterior" },
-  { id: "e4", src: "/simeka images/photos/DSC_0067.jpg.jpeg", alt: "Outdoor walkway and gardens", category: "exterior" },
+  { id: "e1", src: "/simeka images/backgrounds/DSC_4616-cropped-again.jpeg", alt: "Simeka Heights building exterior", category: "exterior" },
+  { id: "e2", src: "/simeka images/photos/DSC_0005.jpeg", alt: "Building entrance and grounds", category: "exterior" },
+  { id: "e3", src: "/simeka images/photos/DSC_0007.jpeg", alt: "Property exterior view", category: "exterior" },
+  { id: "e4", src: "/simeka images/photos/DSC_0067.jpeg", alt: "Outdoor walkway and gardens", category: "exterior" },
   // Community
-  { id: "s1", src: "/simeka images/photos/DSC_0127.jpg.jpeg", alt: "Student community area", category: "social" },
-  { id: "s2", src: "/simeka images/photos/add-to-gallery-DSC_0006-1.jpg.jpeg", alt: "Campus life at Simeka Heights", category: "social" },
+  { id: "s1", src: "/simeka images/photos/DSC_0127.jpeg", alt: "Student community area", category: "social" },
+  { id: "s2", src: "/simeka images/photos/add-to-gallery-DSC_0006-1.jpeg", alt: "Campus life at Simeka Heights", category: "social" },
 ];
 
 const categoryLabels: Record<GalleryCategory, string> = {

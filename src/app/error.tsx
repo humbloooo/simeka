@@ -1,7 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { AlertCircle, RefreshCw } from "lucide-react";
+import { AlertCircle, RefreshCw, Home } from "lucide-react";
 
 export default function Error({
   reset,
@@ -21,10 +22,18 @@ export default function Error({
         <p className="text-muted-foreground mb-8">
           We encountered an unexpected error. Please try again or contact us if the problem persists.
         </p>
-        <Button onClick={reset} className="bg-amber hover:bg-amber-dim text-navy font-semibold">
-          <RefreshCw className="mr-2 h-4 w-4" />
-          Try Again
-        </Button>
+        <div className="flex items-center justify-center gap-3">
+          <Button onClick={reset} className="bg-amber hover:bg-amber-dim text-navy font-semibold">
+            <RefreshCw className="mr-2 h-4 w-4" />
+            Try Again
+          </Button>
+          <Button asChild variant="outline">
+            <Link href="/">
+              <Home className="mr-2 h-4 w-4" />
+              Home
+            </Link>
+          </Button>
+        </div>
       </div>
     </div>
   );

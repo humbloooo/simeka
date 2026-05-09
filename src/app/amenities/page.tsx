@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Amenities",
   description:
     "Explore our world-class amenities: 24/7 security, high-speed WiFi, gym, study lounges, braai area, and more at Simeka Heights near UNIVEN.",
+  alternates: { canonical: "https://simekaheights.com/amenities" },
 };
 
 export default function AmenitiesPage() {
