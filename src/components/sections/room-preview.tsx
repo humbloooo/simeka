@@ -17,7 +17,7 @@ export function RoomPreview() {
   const featured = rooms.slice(0, 3);
 
   return (
-    <section className="bg-muted/30 py-14 sm:py-20 md:py-28">
+    <section className="bg-muted/30 section-spacing">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           title="Pick Your Space"
@@ -30,7 +30,7 @@ export function RoomPreview() {
               <motion.div
                 whileHover={{ y: -6 }}
                 transition={{ duration: 0.3 }}
-                className="group relative w-[80vw] shrink-0 snap-center overflow-hidden rounded-2xl sm:rounded-[28px] border border-border/55 bg-card shadow-[0_20px_60px_-45px_rgba(15,27,45,0.55)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_28px_90px_-55px_rgba(15,27,45,0.58)] sm:w-auto"
+                className="group relative w-[80vw] shrink-0 snap-center overflow-hidden rounded-2xl sm:rounded-4xl border border-border/55 bg-card shadow-[var(--shadow-elevated)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-elevated-hover)] sm:w-auto"
               >
                 <div className="relative h-56 overflow-hidden">
                   <Image

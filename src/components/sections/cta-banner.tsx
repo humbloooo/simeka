@@ -17,7 +17,7 @@ export function CtaBanner() {
   )}`;
 
   return (
-    <section className="relative overflow-hidden py-14 sm:py-20 md:py-28">
+    <section className="relative overflow-hidden section-spacing">
       <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/80 to-primary" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.15),transparent_60%)]" />
 

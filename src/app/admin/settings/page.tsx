@@ -329,7 +329,7 @@ export default function AdminSettingsPage() {
 
         {/* ── Homepage Images ─────────────────────── */}
         <Section title="Homepage Images" icon={ImageIcon}>
-          <p className="text-xs text-white/40 mb-4">Upload images to replace the stock photography on the homepage. Leave an image empty to use the stock version.</p>
+          <p className="text-xs text-white/40 mb-4">Upload images to customise the homepage. When no custom image is uploaded, the default property photos are used. You can replace or remove uploaded images at any time.</p>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <ImageUploadField 
               label="Hero Background" 
@@ -375,7 +375,7 @@ export default function AdminSettingsPage() {
       </div>
 
       {/* Bottom save bar */}
-      <div className="sticky bottom-0 mt-8 flex justify-end rounded-xl border border-white/10 bg-[#0d1b2a]/95 p-4 backdrop-blur-md">
+      <div className="sticky bottom-0 mt-8 flex justify-end rounded-xl border border-white/10 bg-navy-dark/95 p-4 backdrop-blur-md">
         <button
           onClick={handleSave}
           disabled={saving}
@@ -562,6 +562,8 @@ function ImageUploadField({
       alert("Failed to upload image.");
     } finally {
       setUploading(false);
+      // Reset the input so the same file can be re-selected
+      e.target.value = "";
     }
   };
 
@@ -570,9 +572,15 @@ function ImageUploadField({
       <label className="mb-1.5 block text-xs font-medium text-white/60">{label}</label>
       <div className="flex items-center gap-3">
         {value ? (
-          <div className="relative h-16 w-24 shrink-0 overflow-hidden rounded-lg border border-white/10 bg-black/20">
+          <div className="relative h-16 w-24 shrink-0 overflow-hidden rounded-lg border border-white/10 bg-black/20 group">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={value} alt="Preview" className="h-full w-full object-cover" />
+            <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/50 transition-colors">
+              <label className="cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity">
+                <Upload className="h-4 w-4 text-white" />
+                <input type="file" accept="image/*" className="hidden" onChange={handleFileChange} disabled={uploading} />
+              </label>
+            </div>
           </div>
         ) : (
           <div className="flex h-16 w-24 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5">
@@ -586,6 +594,11 @@ function ImageUploadField({
                 <>
                   <Loader2 className="h-3.5 w-3.5 animate-spin text-amber" />
                   Uploading...
+                </>
+              ) : value ? (
+                <>
+                  <Upload className="h-3.5 w-3.5" />
+                  Replace
                 </>
               ) : (
                 <>
@@ -607,6 +620,8 @@ function ImageUploadField({
             )}
           </div>
           {hint && <p className="mt-1.5 text-[10px] text-white/30">{hint}</p>}
+          {value && <p className="mt-1 text-[10px] text-emerald-400/60">Custom image active</p>}
+          {!value && <p className="mt-1 text-[10px] text-white/25">Using default image</p>}
         </div>
       </div>
     </div>

@@ -86,7 +86,7 @@ export function AboutContent() {
             <RevealOnScroll direction="right">
               <div className="relative rounded-2xl overflow-hidden shadow-xl">
                 <Image
-                  src="/images/study-lounge.jpg"
+                  src="/simeka images/Ammenities/DSC_0014.jpeg"
                   alt="Students studying together at Simeka Heights"
                   width={700}
                   height={900}

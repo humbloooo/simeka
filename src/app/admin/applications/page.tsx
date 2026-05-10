@@ -316,7 +316,7 @@ export default function ApplicationsPage() {
           aria-modal="true"
           aria-label={`Application details for ${selected.fullName}`}
         >
-          <div className="w-full max-w-lg rounded-2xl border border-white/10 bg-[#0d1b2a] p-6 max-h-[80vh] overflow-y-auto">
+          <div className="w-full max-w-lg rounded-2xl border border-white/10 bg-navy-dark p-6 max-h-[80vh] overflow-y-auto">
             <div className="flex items-start justify-between mb-4">
               <div>
                 <h2 className="text-lg font-bold text-white">{selected.fullName}</h2>

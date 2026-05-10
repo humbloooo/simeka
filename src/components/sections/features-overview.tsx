@@ -47,7 +47,7 @@ const features = [
 
 export function FeaturesOverview() {
   return (
-    <section className="bg-background py-14 sm:py-20 md:py-28">
+    <section className="bg-background section-spacing">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           title="Built for How Students Actually Live"
@@ -60,7 +60,7 @@ export function FeaturesOverview() {
               <motion.div
                 whileHover={{ y: -4, scale: 1.01 }}
                 transition={{ duration: 0.3 }}
-                className="group relative flex h-full flex-col rounded-2xl sm:rounded-[26px] border border-border/60 bg-card p-5 sm:p-7 shadow-[0_16px_50px_-40px_rgba(15,27,45,0.1)] dark:shadow-none transition-all duration-300 hover:border-primary/25 hover:shadow-[0_28px_80px_-50px_rgba(15,27,45,0.2)] dark:hover:shadow-none"
+                className="group relative flex h-full flex-col rounded-2xl sm:rounded-4xl border border-border/60 bg-card p-5 sm:p-7 shadow-[var(--shadow-card)] dark:shadow-none transition-all duration-300 hover:border-primary/25 hover:shadow-[var(--shadow-card-hover)] dark:hover:shadow-none"
               >
                 <div className="mb-3 sm:mb-5 flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl sm:rounded-2xl bg-primary/10 text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground group-hover:scale-110 group-hover:-rotate-3">
                   <feature.icon className="h-5 w-5 sm:h-6 sm:w-6 transition-transform duration-300 group-hover:scale-110" />

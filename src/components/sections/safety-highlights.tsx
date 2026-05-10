@@ -31,10 +31,10 @@ const safetyFeatures = [
 
 export function SafetyHighlights() {
   const settings = useSiteSettings();
-  const safetyImage = settings?.homepageImages?.safetyImage || "/images/hero.jpg";
+  const safetyImage = settings?.homepageImages?.safetyImage || "/simeka images/photos/DSC_0005.jpeg";
 
   return (
-    <section className="overflow-hidden bg-navy py-14 sm:py-20 md:py-28">
+    <section className="overflow-hidden bg-navy section-spacing">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 items-center gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-20">
           <div>
@@ -77,7 +77,7 @@ export function SafetyHighlights() {
           </div>
 
           <RevealOnScroll direction="right" className="relative">
-            <div className="relative overflow-hidden rounded-[28px] shadow-2xl">
+            <div className="relative overflow-hidden rounded-4xl shadow-2xl">
               <Image
                 src={safetyImage}
                 alt="Simeka Heights security and safety features"
@@ -93,7 +93,7 @@ export function SafetyHighlights() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.5 }}
-              className="absolute -bottom-3 left-3 rounded-2xl sm:rounded-[24px] bg-primary p-3.5 sm:p-5 text-primary-foreground shadow-xl md:-bottom-6 md:-left-6"
+              className="absolute -bottom-3 left-3 rounded-2xl sm:rounded-3xl bg-primary p-3.5 sm:p-5 text-primary-foreground shadow-xl md:-bottom-6 md:-left-6"
             >
               <div className="font-heading text-2xl sm:text-3xl font-bold">0</div>
               <div className="text-xs sm:text-sm font-medium">

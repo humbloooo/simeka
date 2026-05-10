@@ -22,7 +22,7 @@ export function SectionHeading({
     <RevealOnScroll className={cn(centered && "text-center", "mb-8 sm:mb-10 md:mb-14", className)}>
       <h2
         className={cn(
-          "font-heading text-2xl leading-[1.1] sm:text-[2rem] sm:leading-[1.05] md:text-4xl lg:text-[3.25rem] font-bold tracking-tight text-balance",
+          "font-heading text-2xl leading-[1.1] sm:text-3xl sm:leading-[1.05] md:text-4xl lg:text-5xl font-bold tracking-tight text-balance",
           light ? "text-white" : "text-foreground"
         )}
       >

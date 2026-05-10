@@ -16,8 +16,57 @@ export async function PATCH(
   try {
     await connectDB();
     const { id } = await params;
-    const body = await req.json();
 
+    const contentType = req.headers.get("content-type") || "";
+
+    // Handle image replacement via FormData
+    if (contentType.includes("multipart/form-data")) {
+      const formData = await req.formData();
+      const file = formData.get("file") as File | null;
+      const caption = formData.get("caption") as string | null;
+      const category = formData.get("category") as string | null;
+
+      const existing = await GalleryImage.findById(id);
+      if (!existing) {
+        return NextResponse.json({ error: "Image not found" }, { status: 404 });
+      }
+
+      const updates: Record<string, unknown> = {};
+
+      // If a new file is provided, upload to Cloudinary and delete old one
+      if (file && file.size > 0) {
+        const bytes = await file.arrayBuffer();
+        const buffer = Buffer.from(bytes);
+        const base64 = `data:${file.type};base64,${buffer.toString("base64")}`;
+
+        const result = await cloudinary.uploader.upload(base64, {
+          folder: "simeka-heights/gallery",
+          resource_type: "image",
+          transformation: [
+            { width: 1920, height: 1080, crop: "limit", quality: "auto" },
+          ],
+        });
+
+        // Delete old image from Cloudinary
+        try {
+          await cloudinary.uploader.destroy(existing.publicId);
+        } catch (err) {
+          console.error("Failed to delete old Cloudinary image:", err);
+        }
+
+        updates.url = result.secure_url;
+        updates.publicId = result.public_id;
+      }
+
+      if (caption !== null) updates.caption = caption;
+      if (category !== null) updates.category = category;
+
+      const image = await GalleryImage.findByIdAndUpdate(id, updates, { new: true });
+      return NextResponse.json({ image });
+    }
+
+    // Handle JSON updates (caption, category, order, featured)
+    const body = await req.json();
     const allowedUpdates = ["category", "caption", "order", "featured"];
     const updates: Record<string, unknown> = {};
     for (const key of allowedUpdates) {

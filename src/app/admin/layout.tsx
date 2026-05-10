@@ -52,7 +52,7 @@ export default function AdminLayout({
   };
 
   return (
-    <div className="flex h-screen bg-[#0a1628]">
+    <div className="flex h-screen bg-navy-deep">
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div
@@ -63,7 +63,7 @@ export default function AdminLayout({
 
       {/* Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 flex w-64 flex-col border-r border-white/10 bg-[#0d1b2a] transition-transform duration-200 lg:static lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-50 flex w-64 flex-col border-r border-white/10 bg-navy-dark transition-transform duration-200 lg:static lg:translate-x-0 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >

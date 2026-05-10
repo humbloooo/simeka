@@ -19,7 +19,7 @@ import { useSiteSettings } from "@/components/providers/site-settings-provider";
 export function Hero() {
   const nextYear = new Date().getFullYear() + 1;
   const settings = useSiteSettings();
-  const heroImage = settings?.homepageImages?.heroImage || "/images/hero.jpg";
+  const heroImage = settings?.homepageImages?.heroImage || "/simeka images/backgrounds/DSC_4616-cropped-again.jpeg";
 
   return (
     <section className="relative flex min-h-[100svh] items-center overflow-hidden">

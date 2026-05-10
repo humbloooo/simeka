@@ -8,16 +8,30 @@ import { PageTransition } from "@/components/effects/page-transition";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
-type GalleryCategory = "all" | "rooms" | "common" | "exterior" | "social";
+type GalleryCategory = "all" | "rooms" | "amenities" | "exterior" | "events" | "general";
 
 interface GalleryImage {
-  id: string;
-  src: string;
-  alt: string;
-  category: GalleryCategory;
+  _id?: string;
+  id?: string;
+  src?: string;
+  url?: string;
+  alt?: string;
+  caption?: string;
+  category: string;
 }
 
-const images: GalleryImage[] = [
+// Normalise image shape from either local or API source
+function normaliseImage(img: GalleryImage, index: number) {
+  return {
+    id: img._id || img.id || `img-${index}`,
+    src: img.url || img.src || "",
+    alt: img.caption || img.alt || "Gallery image",
+    category: img.category,
+  };
+}
+
+// Local fallback images — used when admin gallery is empty or API unavailable
+const LOCAL_IMAGES: GalleryImage[] = [
   // Rooms
   { id: "r1", src: "/simeka images/Rooms/DSC_4473.jpeg", alt: "Furnished single room interior", category: "rooms" },
   { id: "r2", src: "/simeka images/Rooms/DSC_4433.jpeg", alt: "Student bedroom with study desk", category: "rooms" },
@@ -27,37 +41,74 @@ const images: GalleryImage[] = [
   { id: "r6", src: "/simeka images/Rooms/DSC_4697.jpeg", alt: "Study desk and chair area", category: "rooms" },
   { id: "r7", src: "/simeka images/Rooms/DSC_4705.jpeg", alt: "Clean room interior view", category: "rooms" },
   { id: "r8", src: "/simeka images/Rooms/DSC_0115.jpeg", alt: "Student accommodation bedroom", category: "rooms" },
-  // Common areas
-  { id: "c1", src: "/simeka images/Ammenities/DSC_0014.jpeg", alt: "Study lounge with desks", category: "common" },
-  { id: "c2", src: "/simeka images/Ammenities/DSC_0057.jpeg", alt: "Common area seating", category: "common" },
-  { id: "c3", src: "/simeka images/Ammenities/DSC_0092.jpeg", alt: "Recreational facilities", category: "common" },
-  { id: "c4", src: "/simeka images/Ammenities/DSC_4507.jpeg", alt: "Gym and fitness area", category: "common" },
-  { id: "c5", src: "/simeka images/Ammenities/DSC_4517.jpeg", alt: "Exercise equipment", category: "common" },
-  { id: "c6", src: "/simeka images/Ammenities/DSC_4566.jpeg", alt: "Outdoor braai and chill area", category: "common" },
-  { id: "c7", src: "/simeka images/Ammenities/DSC_4582.jpeg", alt: "Social gathering space", category: "common" },
+  // Common areas (amenities)
+  { id: "c1", src: "/simeka images/Ammenities/DSC_0014.jpeg", alt: "Study lounge with desks", category: "amenities" },
+  { id: "c2", src: "/simeka images/Ammenities/DSC_0057.jpeg", alt: "Common area seating", category: "amenities" },
+  { id: "c3", src: "/simeka images/Ammenities/DSC_0092.jpeg", alt: "Recreational facilities", category: "amenities" },
+  { id: "c4", src: "/simeka images/Ammenities/DSC_4507.jpeg", alt: "Gym and fitness area", category: "amenities" },
+  { id: "c5", src: "/simeka images/Ammenities/DSC_4517.jpeg", alt: "Exercise equipment", category: "amenities" },
+  { id: "c6", src: "/simeka images/Ammenities/DSC_4566.jpeg", alt: "Outdoor braai and chill area", category: "amenities" },
+  { id: "c7", src: "/simeka images/Ammenities/DSC_4582.jpeg", alt: "Social gathering space", category: "amenities" },
   // Exterior
   { id: "e1", src: "/simeka images/backgrounds/DSC_4616-cropped-again.jpeg", alt: "Simeka Heights building exterior", category: "exterior" },
   { id: "e2", src: "/simeka images/photos/DSC_0005.jpeg", alt: "Building entrance and grounds", category: "exterior" },
   { id: "e3", src: "/simeka images/photos/DSC_0007.jpeg", alt: "Property exterior view", category: "exterior" },
   { id: "e4", src: "/simeka images/photos/DSC_0067.jpeg", alt: "Outdoor walkway and gardens", category: "exterior" },
-  // Community
-  { id: "s1", src: "/simeka images/photos/DSC_0127.jpeg", alt: "Student community area", category: "social" },
-  { id: "s2", src: "/simeka images/photos/add-to-gallery-DSC_0006-1.jpeg", alt: "Campus life at Simeka Heights", category: "social" },
+  // Community / events
+  { id: "s1", src: "/simeka images/photos/DSC_0127.jpeg", alt: "Student community area", category: "events" },
+  { id: "s2", src: "/simeka images/photos/add-to-gallery-DSC_0006-1.jpeg", alt: "Campus life at Simeka Heights", category: "events" },
 ];
 
 const categoryLabels: Record<GalleryCategory, string> = {
   all: "All",
   rooms: "Rooms",
-  common: "Common Areas",
+  amenities: "Amenities",
   exterior: "Exterior",
-  social: "Community",
+  events: "Community",
+  general: "General",
 };
 
 export function GalleryContent() {
   const [category, setCategory] = useState<GalleryCategory>("all");
   const [lightbox, setLightbox] = useState<number | null>(null);
+  const [allImages, setAllImages] = useState<ReturnType<typeof normaliseImage>[]>(
+    LOCAL_IMAGES.map(normaliseImage)
+  );
+  const [isFromAdmin, setIsFromAdmin] = useState(false);
 
-  const filtered = category === "all" ? images : images.filter((img) => img.category === category);
+  // Fetch admin gallery images — if any exist, use them instead of local fallback
+  useEffect(() => {
+    let cancelled = false;
+    async function fetchGallery() {
+      try {
+        const res = await fetch("/api/gallery");
+        if (!res.ok) return;
+        const data = await res.json();
+        if (cancelled) return;
+        if (data.images && data.images.length > 0) {
+          setAllImages(data.images.map(normaliseImage));
+          setIsFromAdmin(true);
+        }
+        // If no admin images, keep local fallback (already set)
+      } catch {
+        // API unavailable — keep local fallback
+      }
+    }
+    fetchGallery();
+    return () => { cancelled = true; };
+  }, []);
+
+  // Determine which categories have images
+  const availableCategories = ["all" as GalleryCategory].concat(
+    (Object.keys(categoryLabels) as GalleryCategory[]).filter(
+      (cat) => cat !== "all" && allImages.some((img) => img.category === cat)
+    )
+  );
+
+  const filtered =
+    category === "all"
+      ? allImages
+      : allImages.filter((img) => img.category === category);
 
   const openLightbox = (index: number) => setLightbox(index);
   const closeLightbox = () => setLightbox(null);
@@ -89,7 +140,7 @@ export function GalleryContent() {
           <RevealOnScroll className="flex justify-center mb-8 sm:mb-12">
             <Tabs value={category} onValueChange={(v) => setCategory(v as GalleryCategory)}>
               <TabsList className="bg-muted/50">
-                {(Object.keys(categoryLabels) as GalleryCategory[]).map((cat) => (
+                {availableCategories.map((cat) => (
                   <TabsTrigger key={cat} value={cat} className="data-[state=active]:bg-amber data-[state=active]:text-navy">
                     {categoryLabels[cat]}
                   </TabsTrigger>
@@ -97,6 +148,13 @@ export function GalleryContent() {
               </TabsList>
             </Tabs>
           </RevealOnScroll>
+
+          {/* Source indicator for admin */}
+          {isFromAdmin && (
+            <p className="text-center text-xs text-muted-foreground/50 mb-6">
+              Showing images managed via admin dashboard
+            </p>
+          )}
 
           {/* Image Grid */}
           <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
@@ -157,6 +215,13 @@ export function GalleryContent() {
             <div className="absolute top-5 left-4 sm:top-6 sm:left-6 text-white/50 text-xs sm:text-sm">
               {lightbox + 1} / {filtered.length}
             </div>
+
+            {/* Caption */}
+            {filtered[lightbox].alt && (
+              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/60 text-xs sm:text-sm text-center max-w-md px-4">
+                {filtered[lightbox].alt}
+              </div>
+            )}
 
             {/* Prev */}
             <button

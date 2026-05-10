@@ -38,14 +38,14 @@ export function TestimonialsCarousel() {
 
   if (loading) {
     return (
-      <section className="bg-background py-14 sm:py-20 md:py-28">
+      <section className="bg-background section-spacing">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             title="Straight From the Residents"
             subtitle="Real students, real words. Here's what living at Simeka Heights actually feels like."
           />
           <div className="mx-auto max-w-4xl">
-            <div className="rounded-[28px] border border-border/50 bg-card p-12 text-center">
+            <div className="rounded-4xl border border-border/50 bg-card p-12 text-center">
               <div className="h-6 w-6 mx-auto animate-spin rounded-full border-2 border-primary border-t-transparent" />
             </div>
           </div>
@@ -56,14 +56,14 @@ export function TestimonialsCarousel() {
 
   if (testimonials.length === 0) {
     return (
-      <section className="bg-background py-14 sm:py-20 md:py-28">
+      <section className="bg-background section-spacing">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             title="Straight From the Residents"
             subtitle="Real students, real words. Here's what living at Simeka Heights actually feels like."
           />
           <div className="mx-auto max-w-2xl text-center">
-            <div className="rounded-[28px] border border-border/50 bg-card p-10">
+            <div className="rounded-4xl border border-border/50 bg-card p-10">
               <MessageSquare className="h-10 w-10 text-muted-foreground/30 mx-auto mb-4" />
               <p className="text-muted-foreground">
                 Student reviews coming soon. We&apos;re collecting feedback from our residents.
@@ -82,7 +82,7 @@ export function TestimonialsCarousel() {
     setCurrent((prev) => (prev - 1 + testimonials.length) % testimonials.length);
 
   return (
-    <section className="bg-background py-14 sm:py-20 md:py-28">
+    <section className="bg-background section-spacing">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           title="What Our Residents Say"
@@ -90,7 +90,7 @@ export function TestimonialsCarousel() {
         />
 
         <RevealOnScroll className="mx-auto max-w-4xl">
-          <div className="relative rounded-2xl sm:rounded-[28px] border border-border/50 bg-card p-5 sm:p-8 shadow-[0_20px_60px_-46px_rgba(15,27,45,0.5)] md:p-12">
+          <div className="relative rounded-2xl sm:rounded-4xl border border-border/50 bg-card p-5 sm:p-8 shadow-[var(--shadow-elevated)] md:p-12">
             <Quote className="absolute left-4 top-4 h-8 w-8 sm:left-6 sm:top-6 sm:h-10 sm:w-10 text-primary/20" />
 
             <AnimatePresence mode="wait">
