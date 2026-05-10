@@ -100,7 +100,7 @@ export function Navbar() {
             <span className="hidden xl:inline">{phone}</span>
           </a>
           <ThemeToggle />
-          <Button asChild className="bg-amber hover:bg-amber-dim text-navy font-semibold shadow-md hover-lift">
+          <Button asChild className="bg-amber hover:bg-amber-dim text-navy font-semibold shadow-md hover-lift press-effect hover:shadow-[0_0_20px_rgba(245,158,11,0.3)]">
             <Link href="/apply">
               Apply Now
               <ArrowRight className="h-4 w-4" />

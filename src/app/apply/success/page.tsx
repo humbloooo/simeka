@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CheckCircle2, ArrowRight, MessageCircle } from "lucide-react";
+import { ArrowRight, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SITE_CONFIG } from "@/lib/constants";
+import { SuccessCelebration } from "./success-celebration";
 
 export const metadata: Metadata = {
   title: "Application Submitted",
@@ -18,9 +19,7 @@ export default function ApplicationSuccessPage({
   return (
     <section className="min-h-screen flex items-center justify-center bg-background py-20">
       <div className="mx-auto max-w-lg px-4 text-center">
-        <div className="flex h-20 w-20 items-center justify-center rounded-full bg-success/10 mx-auto mb-6">
-          <CheckCircle2 className="h-10 w-10 text-success" />
-        </div>
+        <SuccessCelebration />
 
         <h1 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4">
           Application Submitted!

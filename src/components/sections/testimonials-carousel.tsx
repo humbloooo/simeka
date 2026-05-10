@@ -100,7 +100,14 @@ export function TestimonialsCarousel() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.4 }}
-                className="text-center"
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.15}
+                onDragEnd={(_e, info) => {
+                  if (info.offset.x > 60) prev();
+                  else if (info.offset.x < -60) next();
+                }}
+                className="text-center cursor-grab active:cursor-grabbing"
               >
                 <div className="mb-4 sm:mb-6 flex justify-center gap-1">
                   {Array.from({ length: testimonial.rating }).map((_, i) => (

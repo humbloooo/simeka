@@ -45,7 +45,7 @@ export function CtaBanner() {
               <Button
                 asChild
                 size="lg"
-                className="h-13 bg-navy px-8 text-base font-bold text-white shadow-lg hover:bg-navy-light"
+                className="h-13 bg-navy px-8 text-base font-bold text-white shadow-lg hover:bg-navy-light press-effect"
               >
                 <Link href="/apply">
                   Apply Now

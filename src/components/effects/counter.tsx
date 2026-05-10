@@ -12,6 +12,7 @@ interface CounterProps {
 export function Counter({ target, suffix = "", prefix = "", duration = 1200 }: CounterProps) {
   const [count, setCount] = useState(0);
   const [hasAnimated, setHasAnimated] = useState(false);
+  const [finished, setFinished] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
   const decimals = Number.isInteger(target) ? 0 : 1;
 
@@ -31,7 +32,11 @@ export function Counter({ target, suffix = "", prefix = "", duration = 1200 }: C
             const eased = 1 - Math.pow(1 - progress, 3);
             const next = eased * target;
             setCount(Number(next.toFixed(decimals)));
-            if (progress < 1) requestAnimationFrame(animate);
+            if (progress < 1) {
+              requestAnimationFrame(animate);
+            } else {
+              setFinished(true);
+            }
           }
 
           requestAnimationFrame(animate);
@@ -45,7 +50,7 @@ export function Counter({ target, suffix = "", prefix = "", duration = 1200 }: C
   }, [target, duration, hasAnimated, decimals]);
 
   return (
-    <span ref={ref} className="tabular-nums">
+    <span ref={ref} className={`tabular-nums inline-block ${finished ? "animate-counter-pop" : ""}`}>
       {prefix}{count}{suffix}
     </span>
   );

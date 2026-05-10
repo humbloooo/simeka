@@ -62,8 +62,8 @@ export function FeaturesOverview() {
                 transition={{ duration: 0.3 }}
                 className="group relative flex h-full flex-col rounded-2xl sm:rounded-[26px] border border-border/60 bg-card p-5 sm:p-7 shadow-[0_16px_50px_-40px_rgba(15,27,45,0.1)] dark:shadow-none transition-all duration-300 hover:border-primary/25 hover:shadow-[0_28px_80px_-50px_rgba(15,27,45,0.2)] dark:hover:shadow-none"
               >
-                <div className="mb-3 sm:mb-5 flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl sm:rounded-2xl bg-primary/10 text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
-                  <feature.icon className="h-5 w-5 sm:h-6 sm:w-6" />
+                <div className="mb-3 sm:mb-5 flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl sm:rounded-2xl bg-primary/10 text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground group-hover:scale-110 group-hover:-rotate-3">
+                  <feature.icon className="h-5 w-5 sm:h-6 sm:w-6 transition-transform duration-300 group-hover:scale-110" />
                 </div>
                 <h3 className="mb-1.5 sm:mb-2 font-heading text-lg sm:text-xl font-semibold text-foreground">
                   {feature.title}

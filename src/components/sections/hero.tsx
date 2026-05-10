@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -41,7 +42,7 @@ export function Hero() {
         <div className="grid w-full gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(280px,0.62fr)] lg:items-end">
           <div className="max-w-3xl">
             <div>
-              <Badge className="mb-6 border-success/30 bg-success/18 px-4 py-1.5 text-sm font-medium text-success hover:bg-success/28">
+              <Badge className="mb-6 border-success/30 bg-success/18 px-4 py-1.5 text-sm font-medium text-success hover:bg-success/28 animate-badge-glow">
                 <ShieldCheck className="mr-1.5 h-4 w-4" />
                 NSFAS Accredited
               </Badge>
@@ -58,34 +59,32 @@ export function Hero() {
             </p>
 
             <div className="mt-6 grid gap-2.5 text-sm text-white/82 grid-cols-1 sm:grid-cols-3 sm:mt-8 sm:gap-3">
-              <div className="flex items-start gap-3 rounded-xl border border-white/12 bg-white/8 px-3 py-2.5 backdrop-blur-sm sm:flex-col sm:items-stretch sm:gap-0 sm:rounded-2xl sm:px-4 sm:py-3">
-                <MapPin className="h-4 w-4 shrink-0 text-amber mt-0.5 sm:mt-0 sm:mb-2" />
-                <div>
-                  <p className="font-semibold text-white text-sm">1.3km from UNIVEN</p>
-                  <p className="mt-0.5 text-white/58 text-xs sm:text-sm sm:mt-1">Walk to lectures. No excuses for missing class.</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3 rounded-xl border border-white/12 bg-white/8 px-3 py-2.5 backdrop-blur-sm sm:flex-col sm:items-stretch sm:gap-0 sm:rounded-2xl sm:px-4 sm:py-3">
-                <Wifi className="h-4 w-4 shrink-0 text-amber mt-0.5 sm:mt-0 sm:mb-2" />
-                <div>
-                  <p className="font-semibold text-white text-sm">Fast fibre WiFi</p>
-                  <p className="mt-0.5 text-white/58 text-xs sm:text-sm sm:mt-1">100Mbps uncapped. Study, stream, and submit on time.</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3 rounded-xl border border-white/12 bg-white/8 px-3 py-2.5 backdrop-blur-sm sm:flex-col sm:items-stretch sm:gap-0 sm:rounded-2xl sm:px-4 sm:py-3">
-                <BusFront className="h-4 w-4 shrink-0 text-amber mt-0.5 sm:mt-0 sm:mb-2" />
-                <div>
-                  <p className="font-semibold text-white text-sm">Student-friendly transport</p>
-                  <p className="mt-0.5 text-white/58 text-xs sm:text-sm sm:mt-1">Free shuttle to campus. Get there without the hassle.</p>
-                </div>
-              </div>
+              {[
+                { Icon: MapPin, title: "1.3km from UNIVEN", desc: "Walk to lectures. No excuses for missing class." },
+                { Icon: Wifi, title: "Fast fibre WiFi", desc: "100Mbps uncapped. Study, stream, and submit on time." },
+                { Icon: BusFront, title: "Student-friendly transport", desc: "Free shuttle to campus. Get there without the hassle." },
+              ].map((card, i) => (
+                <motion.div
+                  key={card.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8 + i * 0.15, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  className="flex items-start gap-3 rounded-xl border border-white/12 bg-white/8 px-3 py-2.5 backdrop-blur-sm sm:flex-col sm:items-stretch sm:gap-0 sm:rounded-2xl sm:px-4 sm:py-3 hover:bg-white/12 hover:border-white/20 transition-colors duration-300"
+                >
+                  <card.Icon className="h-4 w-4 shrink-0 text-amber mt-0.5 sm:mt-0 sm:mb-2" />
+                  <div>
+                    <p className="font-semibold text-white text-sm">{card.title}</p>
+                    <p className="mt-0.5 text-white/58 text-xs sm:text-sm sm:mt-1">{card.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
             </div>
 
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <Button
                 asChild
                 size="lg"
-                className="h-13 bg-amber px-8 text-base font-bold text-navy shadow-lg shadow-amber/25 hover:bg-amber-dim"
+                className="h-13 bg-amber px-8 text-base font-bold text-navy shadow-lg shadow-amber/25 hover:bg-amber-dim press-effect"
               >
                 <Link href="/apply">
                   Apply Now
@@ -151,9 +150,13 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 md:block">
+      <div className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 md:block animate-scroll-bounce">
         <div className="flex h-10 w-6 items-start justify-center rounded-full border-2 border-white/20 p-1.5">
-          <div className="h-2.5 w-1.5 rounded-full bg-amber" />
+          <motion.div
+            className="h-2.5 w-1.5 rounded-full bg-amber"
+            animate={{ y: [0, 12, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          />
         </div>
       </div>
     </section>
