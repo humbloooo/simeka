@@ -19,6 +19,10 @@ import {
   Image as ImageIcon,
   Upload,
   DollarSign,
+  FileText,
+  Plus,
+  Trash2,
+  Users,
 } from "lucide-react";
 
 interface WidgetSettings {
@@ -78,6 +82,21 @@ interface Settings {
       pricePerMonth: number;
       pricePerYear: number;
     };
+  };
+  about: {
+    storyTitle: string;
+    storyParagraphs: string[];
+    storyImage: string;
+    mission: string;
+    vision: string;
+    values: string;
+    differentiators: string[];
+    teamMembers: {
+      name: string;
+      role: string;
+      bio: string;
+      image: string;
+    }[];
   };
   parentCompany: string;
   totalBeds: number;
@@ -139,6 +158,36 @@ const DEFAULT_SETTINGS: Settings = {
       pricePerMonth: 3200,
       pricePerYear: 32000,
     },
+  },
+  about: {
+    storyTitle: "Born From a Belief That Students Deserve Better",
+    storyParagraphs: [
+      "Simeka Heights is a student accommodation development by Mutodo Properties, purpose-built to accommodate University of Venda (UNIVEN) students. Completed in 2021, the privately owned residence offers premium accommodation with 1,040 beds across shared and private living spaces.",
+      "Nestled within the rich environment of Thohoyandou with the Mvudi river running behind it, Simeka Heights was developed in a manner that preserves and protects its natural surroundings. Every detail — from the biometric security to the study lounges to the fibre WiFi — was designed with one question in mind: \"What do our students actually need to succeed?\"",
+      "Simeka Heights is accredited by UNIVEN and meets the standard set out by the Department of Higher Education and Training for NSFAS students. Just 1.3km from UNIVEN and 5km from Thavhani Mall, it's a student safe haven with a unique hospitality approach to service — for total peace of mind.",
+    ],
+    storyImage: "",
+    mission: "To provide safe, modern, and affordable student accommodation that empowers University of Venda students to focus on what matters most — their education and growth.",
+    vision: "To be the most trusted and preferred student residence in Limpopo, setting the standard for premium off-campus living across South Africa.",
+    values: "Safety first, community always. We believe every student deserves a space where they feel secure, supported, and inspired to reach their full potential.",
+    differentiators: [
+      "1.3km from UNIVEN with free shuttle service",
+      "NSFAS accredited with seamless payment processing",
+      "Biometric access and 24/7 CCTV security",
+      "Backup power during load shedding",
+      "High-speed uncapped fibre WiFi",
+      "On-site gym, study lounges, and braai area",
+      "Professional management team available daily",
+      "Regular community events and study groups",
+    ],
+    teamMembers: [
+      {
+        name: "Portia Tshabalala",
+        role: "General Manager",
+        bio: "Portia leads operations at Simeka Heights, ensuring every resident enjoys a safe, comfortable, and supportive environment that empowers academic success.",
+        image: "",
+      },
+    ],
   },
   parentCompany: "Simeka Capital",
   totalBeds: 1040,
@@ -436,6 +485,239 @@ export default function AdminSettingsPage() {
                 />
               </div>
             </div>
+          </div>
+        </Section>
+
+        {/* ── About Us Page ────────────────────────── */}
+        <Section title="About Us Page" icon={FileText}>
+          <p className="text-xs text-white/40 mb-5">Edit the content and images displayed on the About Us page.</p>
+
+          {/* Our Story */}
+          <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5 mb-6">
+            <h3 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
+              <FileText className="h-4 w-4 text-amber" />
+              Our Story
+            </h3>
+            <div className="space-y-4">
+              <Field
+                label="Story Heading"
+                value={settings.about.storyTitle}
+                onChange={(v) => update("about.storyTitle", v)}
+                placeholder="Born From a Belief That Students Deserve Better"
+              />
+              <div>
+                <label className="mb-1.5 block text-xs font-medium text-white/60">
+                  Story Paragraphs
+                </label>
+                <p className="text-[10px] text-white/30 mb-3">Each text area is one paragraph on the page. Add or remove as needed.</p>
+                <div className="space-y-3">
+                  {settings.about.storyParagraphs.map((para, i) => (
+                    <div key={i} className="flex gap-2">
+                      <div className="flex-1">
+                        <TextArea
+                          label={`Paragraph ${i + 1}`}
+                          value={para}
+                          onChange={(v) => {
+                            const updated = [...settings.about.storyParagraphs];
+                            updated[i] = v;
+                            update("about.storyParagraphs", updated);
+                          }}
+                          rows={3}
+                        />
+                      </div>
+                      {settings.about.storyParagraphs.length > 1 && (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const updated = settings.about.storyParagraphs.filter((_, idx) => idx !== i);
+                            update("about.storyParagraphs", updated);
+                          }}
+                          className="mt-5 text-red-400/60 hover:text-red-400 p-1 self-start"
+                          title="Remove paragraph"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                </div>
+                <button
+                  type="button"
+                  onClick={() => update("about.storyParagraphs", [...settings.about.storyParagraphs, ""])}
+                  className="mt-3 flex items-center gap-1.5 text-xs text-amber/70 hover:text-amber transition-colors"
+                >
+                  <Plus className="h-3.5 w-3.5" />
+                  Add Paragraph
+                </button>
+              </div>
+              <ImageUploadField
+                label="Story Image"
+                value={settings.about.storyImage}
+                onChange={(v) => update("about.storyImage", v)}
+                hint="Photo displayed next to the Our Story text"
+              />
+            </div>
+          </div>
+
+          {/* Mission, Vision, Values */}
+          <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5 mb-6">
+            <h3 className="text-sm font-semibold text-white mb-4">Mission, Vision &amp; Values</h3>
+            <div className="space-y-4">
+              <TextArea
+                label="Our Mission"
+                value={settings.about.mission}
+                onChange={(v) => update("about.mission", v)}
+                rows={3}
+              />
+              <TextArea
+                label="Our Vision"
+                value={settings.about.vision}
+                onChange={(v) => update("about.vision", v)}
+                rows={3}
+              />
+              <TextArea
+                label="Our Values"
+                value={settings.about.values}
+                onChange={(v) => update("about.values", v)}
+                rows={3}
+              />
+            </div>
+          </div>
+
+          {/* Differentiators */}
+          <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5 mb-6">
+            <h3 className="text-sm font-semibold text-white mb-2">Why Choose Simeka Heights</h3>
+            <p className="text-[10px] text-white/30 mb-4">Numbered selling points shown in the dark section of the About page.</p>
+            <div className="space-y-2">
+              {settings.about.differentiators.map((item, i) => (
+                <div key={i} className="flex items-center gap-2">
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-amber/10 text-amber text-[10px] font-bold">
+                    {i + 1}
+                  </span>
+                  <input
+                    type="text"
+                    value={item}
+                    onChange={(e) => {
+                      const updated = [...settings.about.differentiators];
+                      updated[i] = e.target.value;
+                      update("about.differentiators", updated);
+                    }}
+                    className="flex-1 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-white/25 outline-none focus:border-amber/40"
+                  />
+                  {settings.about.differentiators.length > 1 && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const updated = settings.about.differentiators.filter((_, idx) => idx !== i);
+                        update("about.differentiators", updated);
+                      }}
+                      className="text-red-400/60 hover:text-red-400 p-1"
+                    >
+                      <Trash2 className="h-3.5 w-3.5" />
+                    </button>
+                  )}
+                </div>
+              ))}
+            </div>
+            <button
+              type="button"
+              onClick={() => update("about.differentiators", [...settings.about.differentiators, ""])}
+              className="mt-3 flex items-center gap-1.5 text-xs text-amber/70 hover:text-amber transition-colors"
+            >
+              <Plus className="h-3.5 w-3.5" />
+              Add Point
+            </button>
+          </div>
+
+          {/* Team Members */}
+          <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
+            <h3 className="text-sm font-semibold text-white mb-2 flex items-center gap-2">
+              <Users className="h-4 w-4 text-amber" />
+              Team Members
+            </h3>
+            <p className="text-[10px] text-white/30 mb-4">Add or edit team members shown on the About page.</p>
+            <div className="space-y-5">
+              {settings.about.teamMembers.map((member, i) => (
+                <div key={i} className="rounded-lg border border-white/8 bg-white/[0.02] p-4">
+                  <div className="flex items-start justify-between gap-2 mb-3">
+                    <span className="text-xs font-medium text-white/50">Member {i + 1}</span>
+                    {settings.about.teamMembers.length > 1 && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const updated = settings.about.teamMembers.filter((_, idx) => idx !== i);
+                          update("about.teamMembers", updated);
+                        }}
+                        className="text-red-400/60 hover:text-red-400 p-1"
+                        title="Remove member"
+                      >
+                        <Trash2 className="h-3.5 w-3.5" />
+                      </button>
+                    )}
+                  </div>
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    <Field
+                      label="Name"
+                      value={member.name}
+                      onChange={(v) => {
+                        const updated = [...settings.about.teamMembers];
+                        updated[i] = { ...updated[i], name: v };
+                        update("about.teamMembers", updated);
+                      }}
+                      placeholder="Full name"
+                    />
+                    <Field
+                      label="Role / Title"
+                      value={member.role}
+                      onChange={(v) => {
+                        const updated = [...settings.about.teamMembers];
+                        updated[i] = { ...updated[i], role: v };
+                        update("about.teamMembers", updated);
+                      }}
+                      placeholder="e.g. General Manager"
+                    />
+                  </div>
+                  <div className="mt-4">
+                    <TextArea
+                      label="Bio"
+                      value={member.bio}
+                      onChange={(v) => {
+                        const updated = [...settings.about.teamMembers];
+                        updated[i] = { ...updated[i], bio: v };
+                        update("about.teamMembers", updated);
+                      }}
+                      rows={2}
+                      placeholder="Short bio..."
+                    />
+                  </div>
+                  <div className="mt-4">
+                    <ImageUploadField
+                      label="Photo"
+                      value={member.image}
+                      onChange={(v) => {
+                        const updated = [...settings.about.teamMembers];
+                        updated[i] = { ...updated[i], image: v };
+                        update("about.teamMembers", updated);
+                      }}
+                      hint="Team member profile photo"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+            <button
+              type="button"
+              onClick={() =>
+                update("about.teamMembers", [
+                  ...settings.about.teamMembers,
+                  { name: "", role: "", bio: "", image: "" },
+                ])
+              }
+              className="mt-4 flex items-center gap-1.5 text-xs text-amber/70 hover:text-amber transition-colors"
+            >
+              <Plus className="h-3.5 w-3.5" />
+              Add Team Member
+            </button>
           </div>
         </Section>
 

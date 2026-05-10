@@ -6,9 +6,10 @@ import { RevealOnScroll } from "@/components/effects/reveal-on-scroll";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { PageTransition } from "@/components/effects/page-transition";
 import { Heart, Eye, Target } from "lucide-react";
-import { team } from "@/data/team";
+import { team as localTeam } from "@/data/team";
+import { useSiteSettings } from "@/components/providers/site-settings-provider";
 
-const values = [
+const LOCAL_VALUES = [
   {
     icon: Target,
     title: "Our Mission",
@@ -26,7 +27,7 @@ const values = [
   },
 ];
 
-const differentiators = [
+const LOCAL_DIFFERENTIATORS = [
   "1.3km from UNIVEN with free shuttle service",
   "NSFAS accredited with seamless payment processing",
   "Biometric access and 24/7 CCTV security",
@@ -37,7 +38,62 @@ const differentiators = [
   "Regular community events and study groups",
 ];
 
+const LOCAL_STORY_TITLE = "Born From a Belief That Students Deserve Better";
+const LOCAL_STORY_PARAGRAPHS = [
+  'Simeka Heights is a student accommodation development by <strong>Mutodo Properties</strong>, purpose-built to accommodate University of Venda (UNIVEN) students. Completed in 2021, the privately owned residence offers premium accommodation with <strong>1,040 beds</strong> across shared and private living spaces.',
+  'Nestled within the rich environment of Thohoyandou with the Mvudi river running behind it, Simeka Heights was developed in a manner that preserves and protects its natural surroundings. Every detail — from the biometric security to the study lounges to the fibre WiFi — was designed with one question in mind: “What do our students actually need to succeed?”',
+  'Simeka Heights is accredited by UNIVEN and meets the standard set out by the Department of Higher Education and Training for NSFAS students. Just <strong>1.3km from UNIVEN</strong> and 5km from Thavhani Mall, it’s a student safe haven with a unique hospitality approach to service — for total peace of mind.',
+];
+
 export function AboutContent() {
+  const settings = useSiteSettings();
+  const about = settings?.about;
+
+  // Story
+  const storyTitle = about?.storyTitle || LOCAL_STORY_TITLE;
+  const storyParagraphs =
+    about?.storyParagraphs && about.storyParagraphs.length > 0
+      ? about.storyParagraphs
+      : null; // null = use local HTML version
+  const storyImage = about?.storyImage || "/simeka images/Ammenities/DSC_0014.jpeg";
+
+  // Mission / Vision / Values
+  const values = [
+    {
+      icon: Target,
+      title: "Our Mission",
+      description: about?.mission || LOCAL_VALUES[0].description,
+    },
+    {
+      icon: Eye,
+      title: "Our Vision",
+      description: about?.vision || LOCAL_VALUES[1].description,
+    },
+    {
+      icon: Heart,
+      title: "Our Values",
+      description: about?.values || LOCAL_VALUES[2].description,
+    },
+  ];
+
+  // Differentiators
+  const differentiators =
+    about?.differentiators && about.differentiators.length > 0
+      ? about.differentiators
+      : LOCAL_DIFFERENTIATORS;
+
+  // Team
+  const teamMembers =
+    about?.teamMembers && about.teamMembers.length > 0
+      ? about.teamMembers.map((m, i) => ({
+          id: `team-${i}`,
+          name: m.name,
+          role: m.role,
+          bio: m.bio || "",
+          image: m.image || "",
+        }))
+      : localTeam;
+
   return (
     <PageTransition>
       {/* Our Story */}
@@ -50,35 +106,23 @@ export function AboutContent() {
                   Our Story
                 </span>
                 <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mt-3 tracking-tight">
-                  Born From a Belief That Students Deserve{" "}
-                  <span className="text-amber">Better</span>
+                  {storyTitle.includes("Better") ? (
+                    <>
+                      {storyTitle.replace("Better", "")}{" "}
+                      <span className="text-amber">Better</span>
+                    </>
+                  ) : (
+                    storyTitle
+                  )}
                 </h2>
                 <div className="mt-6 space-y-4 text-muted-foreground leading-relaxed">
-                  <p>
-                    Simeka Heights is a student accommodation development by{" "}
-                    <span className="text-foreground font-semibold">Mutodo Properties</span>,
-                    purpose-built to accommodate University of Venda (UNIVEN) students.
-                    Completed in 2021, the privately owned residence offers premium
-                    accommodation with{" "}
-                    <span className="text-foreground font-semibold">1,040 beds</span>{" "}
-                    across shared and private living spaces.
-                  </p>
-                  <p>
-                    Nestled within the rich environment of Thohoyandou with the Mvudi
-                    river running behind it, Simeka Heights was developed in a manner that
-                    preserves and protects its natural surroundings. Every detail — from
-                    the biometric security to the study lounges to the fibre WiFi — was
-                    designed with one question in mind: &ldquo;What do our students
-                    actually need to succeed?&rdquo;
-                  </p>
-                  <p>
-                    Simeka Heights is accredited by UNIVEN and meets the standard set out
-                    by the Department of Higher Education and Training for NSFAS students.
-                    Just{" "}
-                    <span className="text-foreground font-semibold">1.3km from UNIVEN</span>
-                    {" "}and 5km from Thavhani Mall, it&apos;s a student safe haven with a
-                    unique hospitality approach to service — for total peace of mind.
-                  </p>
+                  {storyParagraphs
+                    ? storyParagraphs.map((para, i) => (
+                        <p key={i}>{para}</p>
+                      ))
+                    : LOCAL_STORY_PARAGRAPHS.map((html, i) => (
+                        <p key={i} dangerouslySetInnerHTML={{ __html: html }} />
+                      ))}
                 </div>
               </div>
             </RevealOnScroll>
@@ -86,7 +130,7 @@ export function AboutContent() {
             <RevealOnScroll direction="right">
               <div className="relative rounded-2xl overflow-hidden shadow-xl">
                 <Image
-                  src="/simeka images/Ammenities/DSC_0014.jpeg"
+                  src={storyImage}
                   alt="Students studying together at Simeka Heights"
                   width={700}
                   height={900}
@@ -138,9 +182,15 @@ export function AboutContent() {
             subtitle="Dedicated professionals who make Simeka Heights feel like home."
           />
 
-          <div className="flex justify-center">
-            <div className="grid grid-cols-1 gap-8 max-w-md">
-              {team.map((member, i) => (
+          <div className={`flex justify-center`}>
+            <div className={`grid gap-8 ${
+              teamMembers.length === 1
+                ? "grid-cols-1 max-w-md"
+                : teamMembers.length === 2
+                ? "grid-cols-1 sm:grid-cols-2 max-w-2xl"
+                : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl"
+            }`}>
+              {teamMembers.map((member, i) => (
                 <RevealOnScroll key={member.id} delay={i * 0.1}>
                   <motion.div
                     whileHover={{ y: -4 }}
@@ -166,9 +216,11 @@ export function AboutContent() {
                       {member.name}
                     </h3>
                     <p className="text-amber text-sm font-medium">{member.role}</p>
-                    <p className="text-sm text-muted-foreground mt-3 leading-relaxed">
-                      {member.bio}
-                    </p>
+                    {member.bio && (
+                      <p className="text-sm text-muted-foreground mt-3 leading-relaxed">
+                        {member.bio}
+                      </p>
+                    )}
                   </motion.div>
                 </RevealOnScroll>
               ))}
