@@ -9,6 +9,18 @@ import { Check, Users, Maximize2, ArrowRight } from "lucide-react";
 import { rooms } from "@/data/rooms";
 import { PageTransition } from "@/components/effects/page-transition";
 import { formatPrice } from "@/lib/utils";
+import { useSiteSettings } from "@/components/providers/site-settings-provider";
+
+function useRoomImage(roomId: string, fallback: string) {
+  const settings = useSiteSettings();
+  if (roomId === "single-room" && settings?.homepageImages?.roomSingleImage) {
+    return settings.homepageImages.roomSingleImage;
+  }
+  if (roomId === "sharing-room" && settings?.homepageImages?.roomSharingImage) {
+    return settings.homepageImages.roomSharingImage;
+  }
+  return fallback;
+}
 
 export function RoomsContent() {
   return (
@@ -18,115 +30,7 @@ export function RoomsContent() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="space-y-10 sm:space-y-16">
             {rooms.map((room, i) => (
-              <RevealOnScroll key={room.id} delay={i * 0.1}>
-                <div className={`grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center ${
-                  i % 2 !== 0 ? "lg:direction-rtl" : ""
-                }`}>
-                  {/* Image */}
-                  <div className={`relative rounded-2xl overflow-hidden shadow-lg ${i % 2 !== 0 ? "lg:order-2" : ""}`}>
-                    <div className="relative h-56 sm:h-72 md:h-96">
-                      <Image
-                        src={room.images[0]}
-                        alt={room.name}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 1024px) 100vw, 50vw"
-                      />
-                      {room.popular && (
-                        <Badge className="absolute top-4 left-4 bg-amber text-navy font-semibold">
-                          Most Popular
-                        </Badge>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Details */}
-                  <div className={i % 2 !== 0 ? "lg:order-1" : ""}>
-                    <div className="flex items-center gap-3 mb-2">
-                      <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground">
-                        {room.name}
-                      </h2>
-                      {room.available && (
-                        <Badge variant="outline" className="text-success border-success/30 bg-success/5">
-                          Available
-                        </Badge>
-                      )}
-                    </div>
-
-                    <p className="text-muted-foreground leading-relaxed mb-4">
-                      {room.description}
-                    </p>
-
-                    <div className="flex items-baseline gap-2 mb-6">
-                      <span className="text-3xl font-bold text-amber font-heading">
-                        R{formatPrice(room.pricePerMonth)}
-                      </span>
-                      <span className="text-muted-foreground">/month</span>
-                      <span className="text-sm text-muted-foreground">
-                        (R{formatPrice(room.pricePerYear)}/year)
-                      </span>
-                    </div>
-
-                    <div className="flex items-center gap-6 text-sm text-muted-foreground mb-6">
-                      <span className="flex items-center gap-1.5">
-                        <Users className="h-4 w-4 text-amber" />
-                        {room.capacity === 1 ? "Single Occupancy" : `${room.capacity} Person Sharing`}
-                      </span>
-                      <span className="flex items-center gap-1.5">
-                        <Maximize2 className="h-4 w-4 text-amber" />
-                        {room.size}
-                      </span>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-8">
-                      {room.features.map((feature) => (
-                        <div key={feature} className="flex items-center gap-2 text-sm">
-                          <Check className="h-4 w-4 text-success shrink-0" />
-                          <span className="text-foreground/80">{feature}</span>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="mb-6 rounded-xl border border-amber/20 bg-amber/5 p-4">
-                      <p className="text-xs font-semibold uppercase tracking-widest text-amber mb-2">
-                        Included in Rental
-                      </p>
-                      <div className="flex flex-wrap gap-x-5 gap-y-1.5">
-                        {room.includedInRental.map((item) => (
-                          <span
-                            key={item}
-                            className="flex items-center gap-1.5 text-sm text-foreground/80"
-                          >
-                            <Check className="h-3.5 w-3.5 text-amber" />
-                            {item}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="flex flex-wrap gap-3">
-                      <Button
-                        asChild
-                        className="bg-amber hover:bg-amber-dim text-navy font-semibold"
-                      >
-                        <Link href="/apply">
-                          Apply for This Room
-                          <ArrowRight className="ml-2 h-4 w-4" />
-                        </Link>
-                      </Button>
-                      <Button
-                        asChild
-                        variant="outline"
-                        className="border-amber/40 text-amber hover:bg-amber/10 font-semibold"
-                      >
-                        <Link href="/contact">
-                          Enquire Now
-                        </Link>
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </RevealOnScroll>
+              <RoomCard key={room.id} room={room} index={i} />
             ))}
           </div>
 
@@ -250,5 +154,123 @@ export function RoomsContent() {
         </div>
       </section>
     </PageTransition>
+  );
+}
+
+/* ─── Room Card (uses admin-uploaded images when available) ──────── */
+
+function RoomCard({ room, index }: { room: typeof rooms[number]; index: number }) {
+  const imageSrc = useRoomImage(room.id, room.images[0]);
+
+  return (
+    <RevealOnScroll delay={index * 0.1}>
+      <div className={`grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center ${
+        index % 2 !== 0 ? "lg:direction-rtl" : ""
+      }`}>
+        {/* Image */}
+        <div className={`relative rounded-2xl overflow-hidden shadow-lg ${index % 2 !== 0 ? "lg:order-2" : ""}`}>
+          <div className="relative h-56 sm:h-72 md:h-96">
+            <Image
+              src={imageSrc}
+              alt={room.name}
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+            {room.popular && (
+              <Badge className="absolute top-4 left-4 bg-amber text-navy font-semibold">
+                Most Popular
+              </Badge>
+            )}
+          </div>
+        </div>
+
+        {/* Details */}
+        <div className={index % 2 !== 0 ? "lg:order-1" : ""}>
+          <div className="flex items-center gap-3 mb-2">
+            <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground">
+              {room.name}
+            </h2>
+            {room.available && (
+              <Badge variant="outline" className="text-success border-success/30 bg-success/5">
+                Available
+              </Badge>
+            )}
+          </div>
+
+          <p className="text-muted-foreground leading-relaxed mb-4">
+            {room.description}
+          </p>
+
+          <div className="flex items-baseline gap-2 mb-6">
+            <span className="text-3xl font-bold text-amber font-heading">
+              R{formatPrice(room.pricePerMonth)}
+            </span>
+            <span className="text-muted-foreground">/month</span>
+            <span className="text-sm text-muted-foreground">
+              (R{formatPrice(room.pricePerYear)}/year)
+            </span>
+          </div>
+
+          <div className="flex items-center gap-6 text-sm text-muted-foreground mb-6">
+            <span className="flex items-center gap-1.5">
+              <Users className="h-4 w-4 text-amber" />
+              {room.capacity === 1 ? "Single Occupancy" : `${room.capacity} Person Sharing`}
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Maximize2 className="h-4 w-4 text-amber" />
+              {room.size}
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-8">
+            {room.features.map((feature) => (
+              <div key={feature} className="flex items-center gap-2 text-sm">
+                <Check className="h-4 w-4 text-success shrink-0" />
+                <span className="text-foreground/80">{feature}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="mb-6 rounded-xl border border-amber/20 bg-amber/5 p-4">
+            <p className="text-xs font-semibold uppercase tracking-widest text-amber mb-2">
+              Included in Rental
+            </p>
+            <div className="flex flex-wrap gap-x-5 gap-y-1.5">
+              {room.includedInRental.map((item) => (
+                <span
+                  key={item}
+                  className="flex items-center gap-1.5 text-sm text-foreground/80"
+                >
+                  <Check className="h-3.5 w-3.5 text-amber" />
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex flex-wrap gap-3">
+            <Button
+              asChild
+              className="bg-amber hover:bg-amber-dim text-navy font-semibold"
+            >
+              <Link href="/apply">
+                Apply for This Room
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              className="border-amber/40 text-amber hover:bg-amber/10 font-semibold"
+            >
+              <Link href="/contact">
+                Enquire Now
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </div>
+    </RevealOnScroll>
   );
 }

@@ -7,6 +7,7 @@ import { RevealOnScroll } from "@/components/effects/reveal-on-scroll";
 import { PageTransition } from "@/components/effects/page-transition";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { useSiteSettings } from "@/components/providers/site-settings-provider";
 
 type GalleryCategory = "all" | "rooms" | "amenities" | "exterior" | "events" | "general";
 
@@ -75,6 +76,7 @@ export function GalleryContent() {
     LOCAL_IMAGES.map(normaliseImage)
   );
   const [isFromAdmin, setIsFromAdmin] = useState(false);
+  const settings = useSiteSettings();
 
   // Fetch admin gallery images — if any exist, use them instead of local fallback
   useEffect(() => {
@@ -89,7 +91,7 @@ export function GalleryContent() {
           setAllImages(data.images.map(normaliseImage));
           setIsFromAdmin(true);
         }
-        // If no admin images, keep local fallback (already set)
+        // If no admin gallery images, keep local fallback (already set)
       } catch {
         // API unavailable — keep local fallback
       }
@@ -97,6 +99,30 @@ export function GalleryContent() {
     fetchGallery();
     return () => { cancelled = true; };
   }, []);
+
+  // When using local fallback, sync room images with admin-uploaded ones from site settings
+  useEffect(() => {
+    if (isFromAdmin || !settings) return;
+
+    const singleImg = settings.homepageImages?.roomSingleImage;
+    const sharingImg = settings.homepageImages?.roomSharingImage;
+    if (!singleImg && !sharingImg) return;
+
+    setAllImages((prev) => {
+      const updated = [...prev];
+      // Prepend admin-uploaded room images at the top of the rooms category
+      const extras: ReturnType<typeof normaliseImage>[] = [];
+      if (singleImg) {
+        extras.push({ id: "admin-single", src: singleImg, alt: "Single Room (admin)", category: "rooms" });
+      }
+      if (sharingImg) {
+        extras.push({ id: "admin-sharing", src: sharingImg, alt: "Sharing Room (admin)", category: "rooms" });
+      }
+      // Remove any previous admin injections, then prepend
+      const filtered = updated.filter((img) => !img.id.startsWith("admin-"));
+      return [...extras, ...filtered];
+    });
+  }, [isFromAdmin, settings]);
 
   // Determine which categories have images
   const availableCategories = ["all" as GalleryCategory].concat(

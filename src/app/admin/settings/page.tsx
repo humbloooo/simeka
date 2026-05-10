@@ -327,33 +327,34 @@ export default function AdminSettingsPage() {
           </div>
         </Section>
 
-        {/* ── Homepage Images ─────────────────────── */}
-        <Section title="Homepage Images" icon={ImageIcon}>
-          <p className="text-xs text-white/40 mb-4">Upload images to customise the homepage. When no custom image is uploaded, the default property photos are used. You can replace or remove uploaded images at any time.</p>
+        {/* ── Site Images ──────────────────────────── */}
+        <Section title="Site Images" icon={ImageIcon}>
+          <p className="text-xs text-white/40 mb-2">Upload images to customise the site. These images are used on the homepage, rooms page, and anywhere room types are displayed. Remove an image to revert to the default property photo.</p>
+          <p className="text-[10px] text-amber/50 mb-5">Room images sync across the homepage preview cards and the full Rooms page automatically.</p>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-            <ImageUploadField 
-              label="Hero Background" 
-              value={settings.homepageImages.heroImage} 
-              onChange={(v) => update("homepageImages.heroImage", v)} 
+            <ImageUploadField
+              label="Hero Background"
+              value={settings.homepageImages.heroImage}
+              onChange={(v) => update("homepageImages.heroImage", v)}
               hint="Main background image at the top of the homepage"
             />
-            <ImageUploadField 
-              label="Safety Highlights" 
-              value={settings.homepageImages.safetyImage} 
-              onChange={(v) => update("homepageImages.safetyImage", v)} 
-              hint="Image shown next to the safety features"
+            <ImageUploadField
+              label="Safety Section"
+              value={settings.homepageImages.safetyImage}
+              onChange={(v) => update("homepageImages.safetyImage", v)}
+              hint="Image next to the security features section"
             />
-            <ImageUploadField 
-              label="Single Room Preview" 
-              value={settings.homepageImages.roomSingleImage} 
-              onChange={(v) => update("homepageImages.roomSingleImage", v)} 
-              hint="Thumbnail for the Single Room option"
+            <ImageUploadField
+              label="Single Room"
+              value={settings.homepageImages.roomSingleImage}
+              onChange={(v) => update("homepageImages.roomSingleImage", v)}
+              hint="Used on homepage preview + Rooms page for Single Room"
             />
-            <ImageUploadField 
-              label="Sharing Room Preview" 
-              value={settings.homepageImages.roomSharingImage} 
-              onChange={(v) => update("homepageImages.roomSharingImage", v)} 
-              hint="Thumbnail for the Sharing Room option"
+            <ImageUploadField
+              label="Sharing Room"
+              value={settings.homepageImages.roomSharingImage}
+              onChange={(v) => update("homepageImages.roomSharingImage", v)}
+              hint="Used on homepage preview + Rooms page for Sharing Room"
             />
           </div>
         </Section>
