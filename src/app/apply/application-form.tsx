@@ -14,6 +14,7 @@ import { Check, ArrowRight, ArrowLeft, User, GraduationCap, Bed, Wallet, FileChe
 import { applicationSchema, type ApplicationFormData } from "@/lib/validations";
 import { rooms } from "@/data/rooms";
 import { cn, formatPrice } from "@/lib/utils";
+import { useSiteSettings } from "@/components/providers/site-settings-provider";
 
 const steps = [
   { label: "Personal", icon: User },
@@ -28,6 +29,19 @@ export function ApplicationForm() {
   const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
+  const settings = useSiteSettings();
+  const showPrices = settings?.pricing?.showPrices !== false;
+
+  function getPrice(roomId: string, field: "pricePerMonth" | "pricePerYear") {
+    if (roomId === "single-room" && settings?.pricing?.singleRoom?.[field]) {
+      return settings.pricing.singleRoom[field];
+    }
+    if (roomId === "sharing-room" && settings?.pricing?.sharingRoom?.[field]) {
+      return settings.pricing.sharingRoom[field];
+    }
+    const room = rooms.find((r) => r.id === roomId);
+    return room?.[field] ?? 0;
+  }
 
   const {
     register,
@@ -238,7 +252,7 @@ export function ApplicationForm() {
                           <SelectContent>
                             {rooms.filter((r) => r.available).map((room) => (
                               <SelectItem key={room.id} value={room.id}>
-                                {room.name} — R{formatPrice(room.pricePerMonth)}/month
+                                {room.name}{showPrices ? ` — R${formatPrice(getPrice(room.id, "pricePerMonth"))}/month` : ""}
                               </SelectItem>
                             ))}
                           </SelectContent>
@@ -249,7 +263,9 @@ export function ApplicationForm() {
                         <div className="p-4 rounded-xl bg-amber/5 border border-amber/20">
                           <p className="font-heading font-semibold text-foreground">{selectedRoom.name}</p>
                           <p className="text-sm text-muted-foreground mt-1">{selectedRoom.description}</p>
-                          <p className="text-amber font-bold text-lg mt-2">R{formatPrice(selectedRoom.pricePerMonth)}/month</p>
+                          {showPrices && (
+                            <p className="text-amber font-bold text-lg mt-2">R{formatPrice(getPrice(selectedRoom.id, "pricePerMonth"))}/month</p>
+                          )}
                         </div>
                       )}
                       <div>

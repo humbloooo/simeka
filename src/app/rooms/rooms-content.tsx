@@ -22,7 +22,27 @@ function useRoomImage(roomId: string, fallback: string) {
   return fallback;
 }
 
+function usePricing() {
+  const settings = useSiteSettings();
+  const showPrices = settings?.pricing?.showPrices !== false;
+
+  function getPrice(roomId: string, field: "pricePerMonth" | "pricePerYear") {
+    if (roomId === "single-room" && settings?.pricing?.singleRoom?.[field]) {
+      return settings.pricing.singleRoom[field];
+    }
+    if (roomId === "sharing-room" && settings?.pricing?.sharingRoom?.[field]) {
+      return settings.pricing.sharingRoom[field];
+    }
+    const room = rooms.find((r) => r.id === roomId);
+    return room?.[field] ?? 0;
+  }
+
+  return { showPrices, getPrice };
+}
+
 export function RoomsContent() {
+  const { showPrices, getPrice } = usePricing();
+
   return (
     <PageTransition>
       {/* Room Cards */}
@@ -30,7 +50,7 @@ export function RoomsContent() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="space-y-10 sm:space-y-16">
             {rooms.map((room, i) => (
-              <RoomCard key={room.id} room={room} index={i} />
+              <RoomCard key={room.id} room={room} index={i} showPrices={showPrices} getPrice={getPrice} />
             ))}
           </div>
 
@@ -99,7 +119,7 @@ export function RoomsContent() {
                     <td className="p-4 text-sm font-medium text-foreground">Monthly Price</td>
                     {rooms.map((room) => (
                       <td key={room.id} className="p-4 text-center font-bold text-amber">
-                        R{formatPrice(room.pricePerMonth)}
+                        {showPrices ? `R${formatPrice(getPrice(room.id, "pricePerMonth"))}` : "Contact us"}
                       </td>
                     ))}
                   </tr>
@@ -159,7 +179,12 @@ export function RoomsContent() {
 
 /* ─── Room Card (uses admin-uploaded images when available) ──────── */
 
-function RoomCard({ room, index }: { room: typeof rooms[number]; index: number }) {
+function RoomCard({ room, index, showPrices, getPrice }: {
+  room: typeof rooms[number];
+  index: number;
+  showPrices: boolean;
+  getPrice: (roomId: string, field: "pricePerMonth" | "pricePerYear") => number;
+}) {
   const imageSrc = useRoomImage(room.id, room.images[0]);
 
   return (
@@ -202,15 +227,19 @@ function RoomCard({ room, index }: { room: typeof rooms[number]; index: number }
             {room.description}
           </p>
 
-          <div className="flex items-baseline gap-2 mb-6">
-            <span className="text-3xl font-bold text-amber font-heading">
-              R{formatPrice(room.pricePerMonth)}
-            </span>
-            <span className="text-muted-foreground">/month</span>
-            <span className="text-sm text-muted-foreground">
-              (R{formatPrice(room.pricePerYear)}/year)
-            </span>
-          </div>
+          {showPrices ? (
+            <div className="flex items-baseline gap-2 mb-6">
+              <span className="text-3xl font-bold text-amber font-heading">
+                R{formatPrice(getPrice(room.id, "pricePerMonth"))}
+              </span>
+              <span className="text-muted-foreground">/month</span>
+              <span className="text-sm text-muted-foreground">
+                (R{formatPrice(getPrice(room.id, "pricePerYear"))}/year)
+              </span>
+            </div>
+          ) : (
+            <p className="text-lg font-semibold text-amber mb-6">Contact us for pricing</p>
+          )}
 
           <div className="flex items-center gap-6 text-sm text-muted-foreground mb-6">
             <span className="flex items-center gap-1.5">

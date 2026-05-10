@@ -42,7 +42,7 @@ export function Hero() {
         <div className="grid w-full gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(280px,0.62fr)] lg:items-end">
           <div className="max-w-3xl">
             <div>
-              <Badge className="mb-6 border-success/30 bg-success/18 px-4 py-1.5 text-sm font-medium text-success hover:bg-success/28 animate-badge-glow">
+              <Badge className="mb-6 border-amber/30 bg-amber/18 px-4 py-1.5 text-sm font-medium text-amber hover:bg-amber/28 animate-badge-glow">
                 <ShieldCheck className="mr-1.5 h-4 w-4" />
                 NSFAS Accredited
               </Badge>

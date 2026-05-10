@@ -18,6 +18,7 @@ import {
   AlertCircle,
   Image as ImageIcon,
   Upload,
+  DollarSign,
 } from "lucide-react";
 
 interface WidgetSettings {
@@ -66,6 +67,17 @@ interface Settings {
     safetyImage: string;
     roomSingleImage: string;
     roomSharingImage: string;
+  };
+  pricing: {
+    showPrices: boolean;
+    singleRoom: {
+      pricePerMonth: number;
+      pricePerYear: number;
+    };
+    sharingRoom: {
+      pricePerMonth: number;
+      pricePerYear: number;
+    };
   };
   parentCompany: string;
   totalBeds: number;
@@ -116,6 +128,17 @@ const DEFAULT_SETTINGS: Settings = {
     safetyImage: "",
     roomSingleImage: "",
     roomSharingImage: "",
+  },
+  pricing: {
+    showPrices: true,
+    singleRoom: {
+      pricePerMonth: 4200,
+      pricePerYear: 42000,
+    },
+    sharingRoom: {
+      pricePerMonth: 3200,
+      pricePerYear: 32000,
+    },
   },
   parentCompany: "Simeka Capital",
   totalBeds: 1040,
@@ -356,6 +379,63 @@ export default function AdminSettingsPage() {
               onChange={(v) => update("homepageImages.roomSharingImage", v)}
               hint="Used on homepage preview + Rooms page for Sharing Room"
             />
+          </div>
+        </Section>
+
+        {/* ── Pricing ──────────────────────────────── */}
+        <Section title="Room Pricing" icon={DollarSign}>
+          <div className="mb-5">
+            <WidgetCard
+              title="Show Prices on Site"
+              description="Toggle whether room prices are visible to visitors. Turn off to hide pricing and show 'Contact for pricing' instead."
+              icon={<DollarSign className="h-5 w-5 text-amber" />}
+              enabled={settings.pricing.showPrices}
+              onToggle={(v) => update("pricing.showPrices", v)}
+            />
+          </div>
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
+              <h3 className="text-sm font-semibold text-white mb-4">Single Room</h3>
+              <div className="space-y-4">
+                <Field
+                  label="Monthly Price (ZAR)"
+                  value={String(settings.pricing.singleRoom.pricePerMonth)}
+                  onChange={(v) => update("pricing.singleRoom.pricePerMonth", Number(v) || 0)}
+                  type="number"
+                  placeholder="4200"
+                  icon={<DollarSign className="h-4 w-4" />}
+                />
+                <Field
+                  label="Annual Price (ZAR)"
+                  value={String(settings.pricing.singleRoom.pricePerYear)}
+                  onChange={(v) => update("pricing.singleRoom.pricePerYear", Number(v) || 0)}
+                  type="number"
+                  placeholder="42000"
+                  icon={<DollarSign className="h-4 w-4" />}
+                />
+              </div>
+            </div>
+            <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
+              <h3 className="text-sm font-semibold text-white mb-4">Sharing Room</h3>
+              <div className="space-y-4">
+                <Field
+                  label="Monthly Price (ZAR)"
+                  value={String(settings.pricing.sharingRoom.pricePerMonth)}
+                  onChange={(v) => update("pricing.sharingRoom.pricePerMonth", Number(v) || 0)}
+                  type="number"
+                  placeholder="3200"
+                  icon={<DollarSign className="h-4 w-4" />}
+                />
+                <Field
+                  label="Annual Price (ZAR)"
+                  value={String(settings.pricing.sharingRoom.pricePerYear)}
+                  onChange={(v) => update("pricing.sharingRoom.pricePerYear", Number(v) || 0)}
+                  type="number"
+                  placeholder="32000"
+                  icon={<DollarSign className="h-4 w-4" />}
+                />
+              </div>
+            </div>
           </div>
         </Section>
 

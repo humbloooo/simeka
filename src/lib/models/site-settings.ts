@@ -57,6 +57,19 @@ export interface ISiteSettings extends Document {
     roomSharingImage: string;
   };
 
+  // Room pricing
+  pricing: {
+    showPrices: boolean;
+    singleRoom: {
+      pricePerMonth: number;
+      pricePerYear: number;
+    };
+    sharingRoom: {
+      pricePerMonth: number;
+      pricePerYear: number;
+    };
+  };
+
   // General
   parentCompany: string;
   totalBeds: number;
@@ -119,6 +132,18 @@ const SiteSettingsSchema = new Schema<ISiteSettings>(
       safetyImage: { type: String, default: "" },
       roomSingleImage: { type: String, default: "" },
       roomSharingImage: { type: String, default: "" },
+    },
+
+    pricing: {
+      showPrices: { type: Boolean, default: true },
+      singleRoom: {
+        pricePerMonth: { type: Number, default: 4200 },
+        pricePerYear: { type: Number, default: 42000 },
+      },
+      sharingRoom: {
+        pricePerMonth: { type: Number, default: 3200 },
+        pricePerYear: { type: Number, default: 32000 },
+      },
     },
 
     parentCompany: { type: String, default: "Simeka Capital" },

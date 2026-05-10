@@ -15,6 +15,18 @@ import { useSiteSettings } from "@/components/providers/site-settings-provider";
 export function RoomPreview() {
   const settings = useSiteSettings();
   const featured = rooms.slice(0, 3);
+  const showPrices = settings?.pricing?.showPrices !== false;
+
+  function getPrice(roomId: string, field: "pricePerMonth" | "pricePerYear") {
+    if (roomId === "single-room" && settings?.pricing?.singleRoom?.[field]) {
+      return settings.pricing.singleRoom[field];
+    }
+    if (roomId === "sharing-room" && settings?.pricing?.sharingRoom?.[field]) {
+      return settings.pricing.sharingRoom[field];
+    }
+    const room = rooms.find((r) => r.id === roomId);
+    return room?.[field] ?? 0;
+  }
 
   return (
     <section className="bg-muted/30 section-spacing">
@@ -59,12 +71,16 @@ export function RoomPreview() {
                     <h3 className="font-heading text-lg sm:text-xl font-bold text-foreground">
                       {room.name}
                     </h3>
-                    <div className="text-right shrink-0">
-                      <span className="text-xl sm:text-2xl font-bold text-primary">
-                        R{formatPrice(room.pricePerMonth)}
-                      </span>
-                      <span className="block text-xs text-muted-foreground">/month</span>
-                    </div>
+                    {showPrices ? (
+                      <div className="text-right shrink-0">
+                        <span className="text-xl sm:text-2xl font-bold text-primary">
+                          R{formatPrice(getPrice(room.id, "pricePerMonth"))}
+                        </span>
+                        <span className="block text-xs text-muted-foreground">/month</span>
+                      </div>
+                    ) : (
+                      <span className="text-sm font-medium text-primary shrink-0">Contact for pricing</span>
+                    )}
                   </div>
 
                   <p className="mb-3 sm:mb-4 min-h-0 sm:min-h-14 text-xs sm:text-sm leading-relaxed sm:leading-7 text-muted-foreground">
